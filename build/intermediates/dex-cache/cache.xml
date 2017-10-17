@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="E:\AndroidWorkspace\monitor\app\libs\badgeview.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6301e7214e651730acacf9815ac3a56701231015">
+        <dex dex="E:\AndroidWorkspace\monitor\app\build\intermediates\transforms\dex\debug\folders\1000\2\badgeview_93bfb8328f99792801ba82bf2f8376583ebcaa92\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\AndroidWorkspace\monitor\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="E:\AndroidWorkspace\monitor\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_6b3478818fc9a6799f0d1ab7deb192aa90197bec\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\AndroidWorkspace\monitor\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5c554a3dcaa9ebe34ae4d29269f06c5788dfc7af">
+        <dex dex="E:\AndroidWorkspace\monitor\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_da4a59948ecbf6d4a7056c02202ce68b7c46f77e\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yfYang\.android\build-cache\cd00e0914d0b17af1ee647fe80d7dcf3794197b0\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c446de11f8bf0a28aa340e5a8130d227d086cc29">
+        <dex dex="E:\AndroidWorkspace\monitor\app\build\intermediates\pre-dexed\debug\classes_693a32b17cde791364f5b3fe3406124c9d9bbfec.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\yfYang\.android\build-cache\6d1325751e564c2b13c4c9f1dc77b94d3f5b9671\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bac4da4e306fa67af8e7af5cb79369bd973498e9">
+        <dex dex="E:\AndroidWorkspace\monitor\app\build\intermediates\pre-dexed\debug\classes_1cc7d15acd46885b9206c850c5dd163dc20692e4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidWorkspace\monitor\app\libs\badgeview.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6301e7214e651730acacf9815ac3a56701231015">
+        <dex dex="E:\AndroidWorkspace\monitor\app\build\intermediates\pre-dexed\debug\badgeview_93bfb8328f99792801ba82bf2f8376583ebcaa92.jar" />
+    </item>
+
+</items>
