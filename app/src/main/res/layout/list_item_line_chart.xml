@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/loadingIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/chart_height_256">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:layout_gravity="center"
+            android:layout_height="@dimen/loading_size_24"
+            android:layout_width="@dimen/loading_size_24"
+            app:indicatorName="BallSpinFadeLoaderIndicator"
+            app:indicatorColor="@color/colorRed" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/lineChartTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/margin_16"
+        android:paddingLeft="@dimen/margin_16"
+        android:textSize="@dimen/text_size_12"
+        android:textColor="@color/colorBlack"
+        android:visibility="gone"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_height="@dimen/chart_height_256"
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/margin_16"
+        android:visibility="gone"/>
+
+
+</LinearLayout>

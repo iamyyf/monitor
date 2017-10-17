@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cn.chinaunicom.monitor.mainframe.MainframeFragment">
+
+    <include layout="@layout/layout_standard_title_bar" />
+    <include layout="@layout/divider_10_height" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:divider="@drawable/gray_divide_line"
+        android:showDividers="beginning|middle|end">
+
+        <TextView
+            android:id="@+id/deployCondition"
+            style="@style/MainframeSelectStyle"
+            android:text="@string/deploy_condition"
+            android:drawableLeft="@mipmap/ic_deploy"
+            android:drawableRight="@mipmap/ic_arrow_right"/>
+        <TextView
+            android:id="@+id/mainframeCondition"
+            style="@style/MainframeSelectStyle"
+            android:text="@string/mainframe_condition"
+            android:drawableLeft="@mipmap/ic_mainframe_logo"
+            android:drawableRight="@mipmap/ic_arrow_right"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/divider_10_height" />
+
+    <GridView
+        android:layout_gravity="center"
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/margin_16"
+        android:paddingBottom="@dimen/margin_16"
+        android:paddingLeft="@dimen/margin_8"
+        android:paddingRight="@dimen/margin_8"
+        android:columnWidth="@dimen/column_width"
+        android:gravity="center"
+        android:horizontalSpacing="@dimen/margin_8"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="@dimen/margin_8" />
+
+</LinearLayout>

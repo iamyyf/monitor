@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cn.chinaunicom.monitor.mainframe.MainframeDetailActivity">
+
+    <include layout="@layout/layout_standard_title_bar" />
+    <include layout="@layout/divider_1_height" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/margin_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_12"
+            android:text="@string/monitor_target"/>
+
+        <Spinner
+            android:id="@+id/monitorSpinner"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginBottom="@dimen/margin_4"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            style="@style/SpinnerStyle" />
+
+    </LinearLayout>
+
+    <include layout="@layout/divider_1_height" />
+
+    <ListView
+        android:id="@+id/mainframeDetailList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_8"/>
+
+
+
+</LinearLayout>

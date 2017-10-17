@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/colorWhite"
+    tools:context="cn.chinaunicom.monitor.login.LoginActivity">
+
+    <ImageView
+        android:layout_width="@dimen/logo_size"
+        android:layout_height="@dimen/logo_size"
+        android:src="@mipmap/ic_logo"/>
+
+    <EditText
+        android:id="@+id/usernameEdit"
+        style="@style/LoginEditTextStyle"
+        android:layout_marginTop="@dimen/margin_80"
+        android:textColorHint="@color/colorDarkGray"
+        android:hint="@string/username_hint"/>
+
+    <EditText
+        android:id="@+id/passwordEdit"
+        style="@style/LoginEditTextStyle"
+        android:inputType="textPassword"
+        android:layout_marginTop="@dimen/margin_32"
+        android:textColorHint="@color/colorDarkGray"
+        android:hint="@string/password_hint"/>
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_login_btn"
+        android:layout_marginLeft="@dimen/margin_32"
+        android:layout_marginRight="@dimen/margin_32"
+        android:layout_marginTop="@dimen/margin_32"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_size_16"
+        android:text="@string/login"/>
+
+</LinearLayout>

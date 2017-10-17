@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingBottom="@dimen/margin_4"
+    android:paddingTop="@dimen/margin_4"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_height="@dimen/margin_0"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/OnlyTextListItemStyle"
+            android:layout_weight="3"
+            android:text="@string/monitor_item"/>
+        <TextView
+            android:id="@+id/monitorItem"
+            style="@style/OnlyTextListItemStyle"/>
+        <ImageView
+            android:layout_width="@dimen/margin_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="@dimen/margin_0"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/OnlyTextListItemStyle"
+            android:layout_weight="4"
+            android:text="@string/monitor_time"/>
+        <TextView
+            android:id="@+id/monitorTime"
+            style="@style/OnlyTextListItemStyle"/>
+        <ImageView
+            android:layout_width="@dimen/margin_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/margin_16"
+            android:src="@mipmap/ic_chart_logo"
+            android:scaleType="centerInside"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="@dimen/margin_0"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/OnlyTextListItemStyle"
+            android:layout_weight="3"
+            android:text="@string/monitor_data"/>
+        <TextView
+            android:id="@+id/monitorData"
+            style="@style/OnlyTextListItemStyle"/>
+        <ImageView
+            android:layout_width="@dimen/margin_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <!--<Button-->
+        <!--android:id="@+id/chartBtn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/list_item_btn_height"-->
+        <!--android:background="@drawable/selector_list_btn"-->
+        <!--android:text="@string/show_chart"-->
+        <!--android:textSize="@dimen/text_size_12"-->
+        <!--android:textColor="@color/colorDarkRed"-->
+        <!--android:layout_margin="@dimen/margin_16"/>-->
+
+</LinearLayout>

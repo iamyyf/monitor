@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/loadingIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/chart_height_220"
+        android:layout_gravity="center">
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:layout_gravity="center"
+            android:layout_height="@dimen/loading_size_24"
+            android:layout_width="@dimen/loading_size_24"
+            app:indicatorName="BallSpinFadeLoaderIndicator"
+            app:indicatorColor="@color/colorRed" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/firstRowChart"
+        style="@style/PieChartRowStyle">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart_1"
+            style="@style/PieChartStyle" />
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart_2"
+            style="@style/PieChartStyle"/>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart_3"
+            style="@style/PieChartStyle" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/firstRowTitle"
+        style="@style/PieChartRowTitleStyle">
+        <TextView
+            android:id="@+id/chart1Title"
+            style="@style/PieChartTitleStyle" />
+        <TextView
+            android:id="@+id/chart2Title"
+            style="@style/PieChartTitleStyle" />
+        <TextView
+            android:id="@+id/chart3Title"
+            style="@style/PieChartTitleStyle" />
+    </LinearLayout>
+
+
+</LinearLayout>

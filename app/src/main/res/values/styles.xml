@@ -1,0 +1,179 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--TabBar样式-->
+    <style name="StyleMainMenu">
+        <item name="android:layout_width">@dimen/margin_0</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawablePadding">@dimen/margin_0</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/margin_4</item>
+        <item name="android:layout_marginBottom">@dimen/margin_4</item>
+        <item name="android:textColor">@drawable/selector_main_tab_bar_text</item>
+    </style>
+
+    <!--主机页面样式-->
+    <style name="MainframeSelectStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:drawablePadding">@dimen/margin_16</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">@dimen/margin_16</item>
+        <item name="android:layout_marginBottom">@dimen/margin_16</item>
+        <item name="android:layout_marginLeft">@dimen/margin_16</item>
+        <item name="android:layout_marginRight">@dimen/margin_16</item>
+    </style>
+
+    <!--主机界面按钮样式-->
+    <style name="MainframeBtnStyle">
+        <item name="android:layout_width">@dimen/mainframe_btn_size</item>
+        <item name="android:layout_height">@dimen/mainframe_btn_size</item>
+        <item name="android:background">@drawable/selector_mainframe_btn_bkg</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="PieChartStyle">
+        <item name="android:layout_height">@dimen/chart_height_128</item>
+        <item name="android:layout_width">@dimen/margin_0</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingBottom">@dimen/margin_16</item>
+    </style>
+
+    <style name="PieChartTitleStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">@dimen/margin_0</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="PieChartRowStyle">
+        <item name="android:layout_height">@dimen/chart_height_96</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="PieChartRowTitleStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="LoginEditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/margin_10</item>
+        <item name="android:layout_marginLeft">@dimen/margin_32</item>
+        <item name="android:layout_marginRight">@dimen/margin_32</item>
+        <item name="android:background">@drawable/selector_login_edit_text</item>
+    </style>
+
+    <style name="OnlyTextActivityTitleBarStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">@dimen/margin_0</item>
+        <item name="android:layout_weight">10</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:layout_margin">@dimen/margin_4</item>
+    </style>
+
+    //部署情况和主机情况spinner的样式
+    <style name="SpinnerStyle">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">@dimen/margin_0</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/margin_4</item>
+        <item name="android:paddingBottom">@dimen/margin_4</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:dropDownWidth">@dimen/margin_128</item>
+    </style>
+
+    //数据归集spinner的样式
+    <style name="IpSpinnerStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">@dimen/margin_0</item>
+        <item name="android:layout_weight">8</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/margin_4</item>
+        <item name="android:paddingBottom">@dimen/margin_4</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="OnlyTextListItemStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">@dimen/margin_0</item>
+        <item name="android:layout_weight">10</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:layout_marginBottom">@dimen/margin_8</item>
+        <item name="android:layout_marginTop">@dimen/margin_8</item>
+    </style>
+
+    <!--我的-->
+    <style name="MineSelectTabStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:drawablePadding">@dimen/margin_16</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">@dimen/margin_12</item>
+        <item name="android:layout_marginBottom">@dimen/margin_12</item>
+        <item name="android:layout_marginLeft">@dimen/margin_8</item>
+        <item name="android:layout_marginRight">@dimen/margin_16</item>
+    </style>
+
+    <!--我的无图标-->
+    <style name="MineSelectTabWithNoIconStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:drawablePadding">@dimen/margin_16</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/margin_16</item>
+        <item name="android:layout_marginBottom">@dimen/margin_16</item>
+    </style>
+
+    <style name="MineLinerLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:divider">@drawable/gray_divide_line</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:paddingLeft">@dimen/margin_8</item>
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:layout_marginTop">@dimen/margin_10</item>
+    </style>
+
+</resources>

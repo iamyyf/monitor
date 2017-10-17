@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingBottom="@dimen/margin_8"
+    android:paddingTop="@dimen/margin_8"
+    android:orientation="horizontal">
+
+    <!--<TextView-->
+        <!--android:id="@+id/category"-->
+        <!--style="@style/OnlyTextListItemStyle" />-->
+    <!--<TextView-->
+        <!--android:id="@+id/appBelongs"-->
+        <!--style="@style/OnlyTextListItemStyle" />-->
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_weight="6"
+        style="@style/OnlyTextListItemStyle" />
+
+    <TextView
+        android:id="@+id/appBackup"
+        style="@style/OnlyTextListItemStyle" />
+
+    <ImageView
+        android:layout_width="@dimen/margin_0"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@mipmap/ic_arrow_right"
+        android:scaleType="centerInside"
+        android:layout_marginRight="@dimen/margin_8"/>
+
+</LinearLayout>

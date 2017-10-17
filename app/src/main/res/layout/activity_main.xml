@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.chinaunicom.monitor.MainActivity">
+
+
+
+    <RadioGroup
+        android:id="@+id/mainTabGroup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_tab_bar_height"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:background="@color/TabBkg"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/mainTabMainframe"
+            style="@style/StyleMainMenu"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_main_tab_bar_mainframe"
+            android:text="@string/main_frame" />
+
+        <RadioButton
+            android:id="@+id/mainTabAlarm"
+            style="@style/StyleMainMenu"
+            android:drawableTop="@drawable/selector_main_tab_bar_alarm"
+            android:text="@string/alarm" />
+
+        <RadioButton
+            android:id="@+id/mainTabMine"
+            style="@style/StyleMainMenu"
+            android:drawableTop="@drawable/selector_main_tab_bar_mine"
+            android:text="@string/mine" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_tab_bar_height"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:paddingTop="@dimen/margin_4"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/mainTabMainframeBtn"
+            android:layout_width="@dimen/margin_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_32"
+            android:layout_marginRight="@dimen/margin_32"
+            android:visibility="invisible"/>
+
+
+        <Button
+            android:id="@+id/mainTabAlarmBtn"
+            android:layout_width="@dimen/margin_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_32"
+            android:layout_marginRight="@dimen/margin_32"
+            android:visibility="invisible"/>
+
+
+        <Button
+            android:id="@+id/mainTabMineBtn"
+            android:layout_width="@dimen/margin_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_32"
+            android:layout_marginRight="@dimen/margin_32"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/mainTabGroup"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/TabBord"
+        android:layout_above="@id/mainTabGroup"/>
+
+</RelativeLayout>

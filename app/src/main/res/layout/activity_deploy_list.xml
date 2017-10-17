@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cn.chinaunicom.monitor.mainframe.MainframeListActivity">
+
+    <include layout="@layout/layout_standard_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorGray">
+        <TextView
+            style="@style/OnlyTextActivityTitleBarStyle"
+            android:text="@string/deploy_cate"/>
+        <TextView
+            style="@style/OnlyTextActivityTitleBarStyle"
+            android:text="@string/app_belongs"/>
+        <TextView
+            style="@style/OnlyTextActivityTitleBarStyle"
+            android:text="@string/app_class_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Spinner
+            android:id="@+id/deployCateSpinner"
+            style="@style/SpinnerStyle" />
+        <Spinner
+            android:id="@+id/appBelongsSpinner"
+            style="@style/SpinnerStyle" />
+        <Spinner
+            android:id="@+id/appClassSpinner"
+            style="@style/SpinnerStyle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/margin_32"
+        android:background="@color/colorGray">
+        <!--<TextView-->
+            <!--style="@style/OnlyTextActivityTitleBarStyle"-->
+            <!--android:text="@string/deploy_cate"/>-->
+        <!--<TextView-->
+            <!--style="@style/OnlyTextActivityTitleBarStyle"-->
+            <!--android:text="@string/app_categroy"/>-->
+
+        <TextView
+            style="@style/OnlyTextActivityTitleBarStyle"
+            android:layout_weight="6"
+            android:text="@string/application_name"/>
+
+        <TextView
+            style="@style/OnlyTextActivityTitleBarStyle"
+            android:text="@string/app_backup"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/appList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_8"/>
+
+</LinearLayout>

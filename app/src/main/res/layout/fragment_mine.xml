@@ -1,0 +1,157 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/TabBkg"
+    tools:context="cn.chinaunicom.monitor.mine.MineFragment">
+
+    <include layout="@layout/layout_standard_title_bar" />
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_128"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_6"
+        android:background="@drawable/mine_account_bkg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/margin_0"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDarkGray"
+                android:text="@string/project_group"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_lion"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/margin_4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/userNameTextView"
+                android:layout_width="@dimen/margin_0"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/divider_1_height"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/margin_0"
+                android:layout_weight="1"
+                android:layout_height="@dimen/margin_16"
+                android:src="@mipmap/ic_logo"
+                android:scaleType="fitStart"/>
+
+            <TextView
+                android:id="@+id/companyName"
+                android:layout_width="@dimen/margin_0"
+                android:layout_weight="12"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:text="@string/company"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/MineLinerLayoutStyle">>
+        <TextView
+            android:id="@+id/group"
+            style="@style/MineSelectTabStyle"
+            android:text="@string/group"
+            android:drawableLeft="@mipmap/ic_group"
+            android:drawableRight="@mipmap/ic_arrow_right"/>
+
+        <TextView
+            android:id="@+id/report"
+            style="@style/MineSelectTabStyle"
+            android:text="@string/report"
+            android:drawableLeft="@mipmap/ic_report"
+            android:drawableRight="@mipmap/ic_arrow_right"/>
+
+        <TextView
+            android:id="@+id/guide"
+            style="@style/MineSelectTabStyle"
+            android:text="@string/guide"
+            android:drawableLeft="@mipmap/ic_book"
+            android:drawableRight="@mipmap/ic_arrow_right"/>
+
+        <TextView
+            android:id="@+id/clearBuffer"
+            style="@style/MineSelectTabStyle"
+            android:text="@string/clear_buffer"
+            android:drawableLeft="@mipmap/ic_clearbuffer"
+            android:drawableRight="@mipmap/ic_arrow_right"/>
+
+        <TextView
+            android:id="@+id/about"
+            style="@style/MineSelectTabStyle"
+            android:text="@string/about"
+            android:drawableLeft="@mipmap/ic_about"
+            android:drawableRight="@mipmap/ic_arrow_right"/>
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/MineLinerLayoutStyle">
+        <TextView
+            android:id="@+id/setting"
+            style="@style/MineSelectTabStyle"
+            android:text="@string/setting"
+            android:drawableLeft="@mipmap/ic_setting"
+            android:drawableRight="@mipmap/ic_arrow_right"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:divider="@drawable/gray_divide_line"
+        android:showDividers="middle|end"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/logout"
+            style="@style/MineSelectTabWithNoIconStyle"
+            android:text="@string/exit" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
