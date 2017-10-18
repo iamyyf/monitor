@@ -14,15 +14,12 @@ import java.util.Iterator;
 
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.MainActivity;
-import cn.chinaunicom.monitor.alarm.AlarmDetailActivity;
 import cn.chinaunicom.monitor.asynctask.UnCheckAlarmCategoryTask;
 import cn.chinaunicom.monitor.login.LoginActivity;
-import cn.chinaunicom.monitor.sqlite.AlarmDatabaseHelper;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Logger;
 import cn.chinaunicom.monitor.utils.Utils;
 import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.service.PushService;
 
 /**
  * Created by yfYang on 2017/8/28.
@@ -53,10 +50,17 @@ public class MonitorAlarmReceiver extends BroadcastReceiver {
                 Logger.d(TAG, "[MyReceiver] 接收到推送下来的通知");
                 int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
                 Logger.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
-                //TODO:处理收到通知的逻辑
-                UnCheckAlarmCategoryTask task = new UnCheckAlarmCategoryTask(ChinaUnicomApplication.getApplication());
-                task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
-                //TODO:更新主页Tab中告警的图标
+
+                String message = "";
+                if (null != bundle)
+                    message = bundle.getString(JPushInterface.EXTRA_ALERT);
+                //message为空，说明不是晨检报告的推送，就要下载最新告警
+                if (Utils.isStringEmpty(message) || !Config.CHECK_REPORT.equals(message)) {
+                    //TODO:处理收到通知的逻辑
+                    UnCheckAlarmCategoryTask task = new UnCheckAlarmCategoryTask(ChinaUnicomApplication.getApplication());
+                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
+                    //TODO:更新主页Tab中告警的图标
+                }
 
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
                 Logger.d(TAG, "[MyReceiver] 用户点击打开了通知");

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -26,13 +25,18 @@ import cn.chinaunicom.monitor.http.Request.LogoutReq;
 import cn.chinaunicom.monitor.http.Response.LogoutResp;
 import cn.chinaunicom.monitor.login.LoginActivity;
 import cn.chinaunicom.monitor.sqlite.AlarmDatabaseHelper;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
+
 
 public class MineFragment extends Fragment {
 
     private AlarmDatabaseHelper dbHelper;
     private SQLiteDatabase db;
+
+    private final String SHARED_PREFERENCES_NAME = "USER_INFO";
+    private final String USER_NAME = "USERNAME";
+    private final String PASSWORD = "PASSWORD";
 
     @Bind(R.id.userNameTextView)
     TextView userName;
@@ -130,8 +134,17 @@ public class MineFragment extends Fragment {
         db.close();
     }
 
+    private void clearUserInfo() {
+        SharedPreferences preferences =
+                getActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(USER_NAME, "");
+        editor.putString(PASSWORD, "");
+        editor.commit();
+    }
+
     private void initDB() {
-        dbHelper = new AlarmDatabaseHelper(getActivity(), Const.DB_NAME, null, Const.DB_VERSION);
+        dbHelper = new AlarmDatabaseHelper(getActivity(), Config.DB_NAME, null, Config.DB_VERSION);
         db = dbHelper.getWritableDatabase();
     }
 
@@ -179,6 +192,7 @@ public class MineFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+                clearUserInfo();
             } else {
                 Utils.showErrorToast(getActivity(), "登出失败");
             }

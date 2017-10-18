@@ -1,6 +1,5 @@
 package cn.chinaunicom.monitor.mainframe;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -14,7 +13,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
@@ -36,9 +34,8 @@ import cn.chinaunicom.monitor.http.Request.BaseReq;
 import cn.chinaunicom.monitor.http.Request.MainframeListReq;
 import cn.chinaunicom.monitor.http.Response.EnviAndCateResp;
 import cn.chinaunicom.monitor.http.Response.MainframeListResp;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
-import es.dmoral.toasty.Toasty;
 
 public class MainframeListActivity extends BaseActivity{
 
@@ -220,7 +217,7 @@ public class MainframeListActivity extends BaseActivity{
                 if (!Utils.isListEmpty(envirEntityList) && !Utils.isListEmpty(cateEntityList))
                     initCurEnvirAndCate(envirEntityList.get(0), cateEntityList.get(0));
             } else
-                Utils.showErrorToast(MainframeListActivity.this, Const.TOAST_REQUEST_FAILED);
+                Utils.showErrorToast(MainframeListActivity.this, Config.TOAST_REQUEST_FAILED);
         }
     }
 
@@ -339,7 +336,7 @@ public class MainframeListActivity extends BaseActivity{
 
         private void initLoadToast(LoadToast loadToast) {
             loadToast.setProgressColor(Color.WHITE);
-            loadToast.setTranslationY(Const.LOAD_TOAST_POS);
+            loadToast.setTranslationY(Config.LOAD_TOAST_POS);
             loadToast.setBackgroundColor(Color.rgb(244,34,6));
         }
 
@@ -373,7 +370,7 @@ public class MainframeListActivity extends BaseActivity{
                 loadToast.success();
             } else {
                 loadToast.error();
-                Utils.showErrorToast(MainframeListActivity.this, Const.TOAST_REQUEST_FAILED);
+                Utils.showErrorToast(MainframeListActivity.this, Config.TOAST_REQUEST_FAILED);
             }
             envirSpinner.setEnabled(true);
             categorySpinner.setEnabled(true);

@@ -1,12 +1,8 @@
 package cn.chinaunicom.monitor.mainframe;
 
-import android.app.Activity;
-import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,14 +25,12 @@ import cn.chinaunicom.monitor.BaseActivity;
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.R;
 import cn.chinaunicom.monitor.adapters.MainframeDetailAdapter;
-import cn.chinaunicom.monitor.beans.AppbelongEntity;
 import cn.chinaunicom.monitor.beans.ItemEntity;
 import cn.chinaunicom.monitor.beans.ItemInfo;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.MainframeDetailReq;
 import cn.chinaunicom.monitor.http.Response.MainframeDetailResp;
-import cn.chinaunicom.monitor.http.Response.MainframeListResp;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
 
 public class MainframeDetailActivity extends BaseActivity {
@@ -111,7 +105,7 @@ public class MainframeDetailActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(new Intent(MainframeDetailActivity.this, ChartListActivity.class));
-                intent.putExtra("Monitor_Item", Const.MAINFRAME_DETAIL);
+                intent.putExtra("Monitor_Item", Config.MAINFRAME_DETAIL);
                 intent.putExtra("PARAM1", itemEntities.get(position).itemid+"");
                 startActivity(intent);
             }
@@ -173,7 +167,7 @@ public class MainframeDetailActivity extends BaseActivity {
                 }
             } else {
                 loadToast.error();
-                Utils.showErrorToast(MainframeDetailActivity.this, Const.TOAST_REQUEST_FAILED);
+                Utils.showErrorToast(MainframeDetailActivity.this, Config.TOAST_REQUEST_FAILED);
             }
             isTaskRunning = false;
         }

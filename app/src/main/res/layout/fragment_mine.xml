@@ -15,7 +15,7 @@
         android:layout_marginLeft="@dimen/margin_10"
         android:layout_marginRight="@dimen/margin_10"
         android:layout_marginBottom="@dimen/margin_6"
-        android:background="@drawable/mine_account_bkg">
+        android:background="@drawable/card_bkg">
 
         <LinearLayout
             android:layout_width="match_parent"

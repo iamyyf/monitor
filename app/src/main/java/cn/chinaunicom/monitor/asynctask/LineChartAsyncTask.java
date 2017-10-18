@@ -3,7 +3,6 @@ package cn.chinaunicom.monitor.asynctask;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.Toast;
 
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.chart.LineChartStyle;
@@ -11,11 +10,8 @@ import cn.chinaunicom.monitor.chart.charthelper.LineChartHelper;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.ChartReq;
 import cn.chinaunicom.monitor.http.Response.ChartResp;
-import cn.chinaunicom.monitor.utils.Const;
-import cn.chinaunicom.monitor.utils.Logger;
 import cn.chinaunicom.monitor.utils.Utils;
 import cn.chinaunicom.monitor.viewholders.LineChartViewHolder;
-import es.dmoral.toasty.Toasty;
 
 /**
  * Created by yfyang on 2017/8/10.
@@ -57,7 +53,7 @@ public class LineChartAsyncTask extends AsyncTask<Void, Void, ChartResp> {
                 lineChartHelper.setData(resp.data);
             }
         } else {
-            //Toasty.error(context, Const.TOAST_REQUEST_FAILED, Toast.LENGTH_SHORT).show();
+            //Toasty.error(context, Config.TOAST_REQUEST_FAILED, Toast.LENGTH_SHORT).show();
         }
         viewHolder.loading.setVisibility(View.GONE);
         viewHolder.chartTitle.setVisibility(View.VISIBLE);

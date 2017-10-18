@@ -36,13 +36,11 @@ import butterknife.OnClick;
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.MainActivity;
 import cn.chinaunicom.monitor.R;
-import cn.chinaunicom.monitor.beans.AlarmCategoryCenterEntity;
 import cn.chinaunicom.monitor.beans.AlarmCategoryEntity;
 import cn.chinaunicom.monitor.beans.CenterEntity;
 import cn.chinaunicom.monitor.callback.TopRightPointCallBack;
 import cn.chinaunicom.monitor.sqlite.AlarmDatabaseHelper;
-import cn.chinaunicom.monitor.utils.Const;
-import cn.chinaunicom.monitor.utils.Logger;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
 import cn.chinaunicom.monitor.viewholders.AlarmCategoryViewHolder;
 import me.leolin.shortcutbadger.ShortcutBadger;
@@ -61,7 +59,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
     public static AlarmFragment instance = null;
 
     @Bind(R.id.txtViewTitle)
-    TextView title;
+    public TextView title;
 
     @Bind(R.id.imgBtnRight)
     ImageButton imgBtnRight;
@@ -71,7 +69,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
 
     @OnClick(R.id.imgBtnRight)
     void popMenu() {
-        Cursor uncheckCenterCursor = db.query("CENTER", Const.CENTER_COLUMN,
+        Cursor uncheckCenterCursor = db.query("CENTER", Config.CENTER_COLUMN,
                 null, null, null, null, null);
         while (uncheckCenterCursor.moveToNext()) {
             if (uncheckCenterCursor.getInt(3) == 1) //有未读消息
@@ -114,6 +112,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
     public void onDestroyView() {
         super.onDestroyView();
         //ChinaUnicomApplication.alarmCategoryEntities.clear();
+        instance = null;
     }
 
     @Override
@@ -124,7 +123,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
     }
 
     private void initDB() {
-        dbHelper = new AlarmDatabaseHelper(getContext(), Const.DB_NAME, null, Const.DB_VERSION);
+        dbHelper = new AlarmDatabaseHelper(getContext(), Config.DB_NAME, null, Config.DB_VERSION);
         db = dbHelper.getWritableDatabase();
     }
 
@@ -133,9 +132,10 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
         imgRightBtnBadgeView = new BadgeView(getActivity());
         imgRightBtnBadgeView.setTargetView(imgBtnRight);
         imgRightBtnBadgeView.getBackground().setAlpha(0);
+        imgRightBtnBadgeView.setTextColor(Color.rgb(139, 34, 82));
         imgRightBtnBadgeView.setBadgeGravity(Gravity.TOP | Gravity.RIGHT );
 
-        Cursor uncheckCenterCursor = db.query("CENTER", Const.CENTER_COLUMN,
+        Cursor uncheckCenterCursor = db.query("CENTER", Config.CENTER_COLUMN,
                 null, null, null, null, null);
         while (uncheckCenterCursor.moveToNext()) {
             if (uncheckCenterCursor.getInt(3) == 1) {
@@ -165,8 +165,8 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
     private void initTopRigtMenu() {
         updateAlarmCenterList();
         menu = new TopRightMenu(getActivity());
-        menu.setHeight(Const.POP_UP_DIALOG_HEIGHT)
-                .setWidth(Const.POP_UP_DIALOG_WIDTH)
+        menu.setHeight(Config.POP_UP_DIALOG_HEIGHT)
+                .setWidth(Config.POP_UP_DIALOG_WIDTH)
                 .showIcon(true)
                 .dimBackground(true)
                 .needAnimationStyle(true)
@@ -199,7 +199,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
 
     //删除弹出菜单对话框里面中心前的红点与否
     private void removeCenterRedPoint() {
-        Cursor centerCursor = db.query("ALARM_CATEGORY", Const.ALARM_CATEGORY_COLUMN,
+        Cursor centerCursor = db.query("ALARM_CATEGORY", Config.ALARM_CATEGORY_COLUMN,
                 "center_id=?", new String[]{ChinaUnicomApplication.alarmCurCenter.itemId}, null, null, null);
 
         if (!centerCursor.moveToNext()) {
@@ -264,7 +264,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
 
     //这里进行全局告警类别列表更新的目的在于，如果首次打开App且没有更新的告警来，要读取以前是否有未读的消息进行显示
     private void getAlarmCategoryEntities(String currentCenterId) {
-        Cursor cursor = db.query("ALARM_CATEGORY",Const.ALARM_CATEGORY_COLUMN, "center_id=?",
+        Cursor cursor = db.query("ALARM_CATEGORY", Config.ALARM_CATEGORY_COLUMN, "center_id=?",
                 new String[]{currentCenterId}, null, null,null);
         //每次加载新的UI要将全局保存的告警类别信息进行清空，否则会重复显示
         ChinaUnicomApplication.alarmCategoryEntities.clear();
@@ -284,7 +284,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
     }
 
     private void updateAlarmCenterList() {
-        Cursor centerCursor = db.query("CENTER", Const.CENTER_COLUMN, null, null, null, null, null);
+        Cursor centerCursor = db.query("CENTER", Config.CENTER_COLUMN, null, null, null, null, null);
         ChinaUnicomApplication.alarmCenterList.clear();
         while (centerCursor.moveToNext()) {
             CenterEntity e = new CenterEntity();
@@ -375,12 +375,12 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
         if (!Utils.isListEmpty(ChinaUnicomApplication.alarmCenterList))
             title.setText(ChinaUnicomApplication.alarmCurCenter.title + "-告警");
         else
-            title.setText("");
+            title.setText("暂无任何告警");
     }
 
     @Override
     public void showPoint() {
-        Cursor uncheckCenterCursor = db.query("CENTER", Const.CENTER_COLUMN,
+        Cursor uncheckCenterCursor = db.query("CENTER", Config.CENTER_COLUMN,
                 null, null, null, null, null);
         while (uncheckCenterCursor.moveToNext()) {
             if (uncheckCenterCursor.getInt(3) == 1) {

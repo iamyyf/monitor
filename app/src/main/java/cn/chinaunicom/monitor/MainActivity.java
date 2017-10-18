@@ -14,7 +14,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.jauker.widget.BadgeView;
@@ -32,11 +31,10 @@ import cn.chinaunicom.monitor.mainframe.MainframeFragment;
 import cn.chinaunicom.monitor.mine.MineFragment;
 import cn.chinaunicom.monitor.receiver.LocalBroadcastManager;
 import cn.chinaunicom.monitor.sqlite.AlarmDatabaseHelper;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
 import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
-import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class  MainActivity extends BaseFragmentActivity implements TabBarBadgeCallBack {
 
@@ -103,8 +101,8 @@ public class  MainActivity extends BaseFragmentActivity implements TabBarBadgeCa
     }
 
     private void initDB() {
-        Const.DB_NAME = alias + ".db";
-        dbHelper = new AlarmDatabaseHelper(this, Const.DB_NAME, null, Const.DB_VERSION);
+        Config.DB_NAME = alias + ".db";
+        dbHelper = new AlarmDatabaseHelper(this, Config.DB_NAME, null, Config.DB_VERSION);
     }
 
     //获得未读消息条数

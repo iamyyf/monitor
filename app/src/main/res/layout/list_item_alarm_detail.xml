@@ -4,24 +4,51 @@
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/margin_8"
     android:paddingTop="@dimen/margin_8"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/alarmSendTime"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margin_16"
-        android:textSize="@dimen/text_size_12"
-        android:layout_weight="1" />
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorShadow"
+        android:textSize="@dimen/text_size_12" />
 
-    <TextView
-        android:id="@+id/alarmContent"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:textColor="@color/colorBlack"
+        android:background="@drawable/card_bkg"
         android:layout_marginRight="@dimen/margin_16"
-        android:layout_marginTop="@dimen/margin_8"
-        android:textSize="@dimen/text_size_12"/>
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_16"
+        android:paddingRight="@dimen/margin_16"
+        android:paddingLeft="@dimen/margin_16"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/alarmTitle"
+            style="@style/AlarmCardTextViewStyle"
+            android:textSize="@dimen/text_size_16"
+            android:gravity="center"/>
+
+        <include layout="@layout/divider_1_height" />
+
+        <TextView
+            android:id="@+id/alarmContent"
+            style="@style/AlarmCardTextViewStyle"
+            android:textSize="@dimen/text_size_12" />
+
+        <include layout="@layout/divider_1_height" />
+
+        <TextView
+            android:id="@+id/alarmCenter"
+            style="@style/AlarmCardTextViewStyle"
+            android:textSize="@dimen/text_size_12" />
+
+    </LinearLayout>
+
+
+
 
 </LinearLayout>

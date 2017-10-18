@@ -9,13 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 import cn.chinaunicom.monitor.adapters.AlarmCategoryAdapter;
-import cn.chinaunicom.monitor.beans.AlarmCategoryCenterEntity;
 import cn.chinaunicom.monitor.beans.AlarmCategoryEntity;
 import cn.chinaunicom.monitor.beans.CellEntity;
 import cn.chinaunicom.monitor.beans.CenterEntity;
 import cn.chinaunicom.monitor.beans.GridInCenter;
 import cn.chinaunicom.monitor.beans.GridItem;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 
 /**
  * Created by yfyang on 2017/8/1.
@@ -48,9 +47,9 @@ public class ChinaUnicomApplication extends Application {
         int w_screen = dm.widthPixels;
         int h_screen = dm.heightPixels;
 
-        Const.LOAD_TOAST_POS = h_screen/2;
-        Const.POP_UP_DIALOG_HEIGHT = h_screen;
-        Const.POP_UP_DIALOG_WIDTH = (h_screen/3);
+        Config.LOAD_TOAST_POS = h_screen/2;
+        Config.POP_UP_DIALOG_HEIGHT = h_screen;
+        Config.POP_UP_DIALOG_WIDTH = (h_screen/3);
 
         alarmCategoryAdapter = new AlarmCategoryAdapter(getApplication());
     }

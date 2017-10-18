@@ -8,9 +8,8 @@ import android.widget.BaseAdapter;
 import java.util.List;
 
 import cn.chinaunicom.monitor.R;
-import cn.chinaunicom.monitor.beans.GridInCenter;
 import cn.chinaunicom.monitor.beans.GridItem;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.viewholders.GridViewHolder;
 
 /**
@@ -53,7 +52,7 @@ public class GridAdapter extends BaseAdapter {
         }
 
         viewHolder.itemName.setText(gridData.get(position).monitorItemName);
-        viewHolder.icon.setImageResource(Const.GRID_VIEW_ITEM_LOGO[position%5]);
+        viewHolder.icon.setImageResource(Config.GRID_VIEW_ITEM_LOGO[position%5]);
 
         return convertView;
     }

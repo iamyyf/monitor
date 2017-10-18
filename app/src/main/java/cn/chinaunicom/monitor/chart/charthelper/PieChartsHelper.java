@@ -1,13 +1,9 @@
 package cn.chinaunicom.monitor.chart.charthelper;
 
-import android.graphics.Color;
-
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +11,6 @@ import java.util.List;
 import cn.chinaunicom.monitor.R;
 import cn.chinaunicom.monitor.chart.PieChartStyle;
 import cn.chinaunicom.monitor.http.Response.PieChartResp;
-import cn.chinaunicom.monitor.utils.Const;
 
 /**
  * Created by yfyang on 2017/8/7.

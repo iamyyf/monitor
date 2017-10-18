@@ -1,27 +1,21 @@
 package cn.chinaunicom.monitor.asynctask;
 
-import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
-import java.util.Map;
-
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.MainActivity;
 import cn.chinaunicom.monitor.alarm.AlarmFragment;
-import cn.chinaunicom.monitor.beans.AlarmCategoryCenterEntity;
 import cn.chinaunicom.monitor.beans.AlarmCategoryEntity;
 import cn.chinaunicom.monitor.beans.CenterEntity;
-import cn.chinaunicom.monitor.callback.TopRightPointCallBack;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.AlarmCategoryReq;
 import cn.chinaunicom.monitor.http.Response.UnCheckAlarmCategoryResp;
 import cn.chinaunicom.monitor.sqlite.AlarmDatabaseHelper;
-import cn.chinaunicom.monitor.utils.Const;
-import cn.chinaunicom.monitor.utils.Logger;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
@@ -38,7 +32,7 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
 
     public UnCheckAlarmCategoryTask(Context context) {
         this.context = context;
-        dbHelper = new AlarmDatabaseHelper(context, Const.DB_NAME, null, Const.DB_VERSION);
+        dbHelper = new AlarmDatabaseHelper(context, Config.DB_NAME, null, Config.DB_VERSION);
         db = dbHelper.getWritableDatabase();
     }
 
@@ -53,7 +47,7 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
     }
 
     private void getAlarmCategoryEntities(String currentCenterId) {
-        Cursor cursor = db.query("ALARM_CATEGORY",Const.ALARM_CATEGORY_COLUMN, "center_id=?",
+        Cursor cursor = db.query("ALARM_CATEGORY", Config.ALARM_CATEGORY_COLUMN, "center_id=?",
                 new String[]{currentCenterId}, null, null,null);
         ChinaUnicomApplication.alarmCategoryEntities.clear();
         while (cursor.moveToNext()) {
@@ -70,7 +64,7 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
     }
 
     private void updateAlarmCenterList() {
-        Cursor centerCursor = db.query("CENTER", Const.CENTER_COLUMN, null, null, null, null, null);
+        Cursor centerCursor = db.query("CENTER", Config.CENTER_COLUMN, null, null, null, null, null);
         ChinaUnicomApplication.alarmCenterList.clear();
         while (centerCursor.moveToNext()) {
             CenterEntity e = new CenterEntity();
@@ -115,7 +109,7 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
                 for (int centerNum = 0; centerNum < resp.data.records.size(); centerNum++) {
                     String centerName = resp.data.records.get(centerNum).centerName;
                     String centerId = resp.data.records.get(centerNum).centerId;
-                    Cursor uncheckCenterCursor = db.query("CENTER", Const.CENTER_COLUMN,
+                    Cursor uncheckCenterCursor = db.query("CENTER", Config.CENTER_COLUMN,
                             "center_name=? and center_id=?", new String[]{centerName, centerId}, null, null, null);
                     //如果之前这个中心有未读消息，则更新is_uncheck字段，否则插入新内容
                     ContentValues centerValues = new ContentValues();
@@ -148,7 +142,7 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
                         int cateAlarmCnt = ChinaUnicomApplication.unCheckAlarmCategories.get(cateNum).value;
                         String cateCenterId = resp.data.records.get(centerNum).centerId;
                         //查询未查看的类别中是否有新请求到的类别
-                        Cursor uncheckCateCursor = db.query("ALARM_CATEGORY", Const.ALARM_CATEGORY_COLUMN,
+                        Cursor uncheckCateCursor = db.query("ALARM_CATEGORY", Config.ALARM_CATEGORY_COLUMN,
                                 "category=? and center_id=?", new String[]{cateName, cateCenterId}, null, null, null);
 
                         ContentValues cateValues = new ContentValues();
@@ -175,6 +169,8 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
                     }
                 }
                 MainActivity.instance.updateBadge();
+                if (null != AlarmFragment.instance)
+                    AlarmFragment.instance.title.setText(ChinaUnicomApplication.alarmCurCenter.title + "-告警");
         }
     }
 }

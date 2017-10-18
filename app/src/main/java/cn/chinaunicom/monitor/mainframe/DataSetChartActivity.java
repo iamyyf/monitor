@@ -2,7 +2,6 @@ package cn.chinaunicom.monitor.mainframe;
 
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +23,11 @@ import butterknife.OnClick;
 import cn.chinaunicom.monitor.BaseActivity;
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.R;
-import cn.chinaunicom.monitor.adapters.ChartsAdapter;
 import cn.chinaunicom.monitor.adapters.DataSetChartsAdapter;
-import cn.chinaunicom.monitor.beans.DeployCategoryEntity;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.DataSetIpReq;
 import cn.chinaunicom.monitor.http.Response.DataSetIpResp;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
 import cn.chinaunicom.monitor.viewholders.BaseViewHolder;
 
@@ -166,7 +163,7 @@ public class DataSetChartActivity extends BaseActivity {
             super.onPreExecute();
             req = new DataSetIpReq();
             req.userToken = ChinaUnicomApplication.token;
-            req.groupName = Const.DATA_SET_IP_REQ;
+            req.groupName = Config.DATA_SET_IP_REQ;
             Utils.initLoadToast(loadToast);
             loadToast.show();
         }
@@ -187,7 +184,7 @@ public class DataSetChartActivity extends BaseActivity {
                 spinnerAdapter.notifyDataSetChanged();
             } else {
                 loadToast.error();
-                Utils.showErrorToast(DataSetChartActivity.this, Const.TOAST_REQUEST_FAILED);
+                Utils.showErrorToast(DataSetChartActivity.this, Config.TOAST_REQUEST_FAILED);
             }
         }
     }

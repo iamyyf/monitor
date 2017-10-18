@@ -18,14 +18,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.chinaunicom.monitor.BaseActivity;
-import cn.chinaunicom.monitor.BaseFragmentActivity;
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.MainActivity;
 import cn.chinaunicom.monitor.R;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.LoginReq;
 import cn.chinaunicom.monitor.http.Response.LoginResp;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
 
 public class LoginActivity extends BaseActivity {
@@ -54,7 +53,7 @@ public class LoginActivity extends BaseActivity {
         }
         else {
             loginBtn.setEnabled(true);
-            Utils.showErrorToast(this, Const.TOAST_LOGIN_TIP);
+            Utils.showErrorToast(this, Config.TOAST_LOGIN_TIP);
         }
     }
 
@@ -86,6 +85,12 @@ public class LoginActivity extends BaseActivity {
                 .getString(USER_NAME, ""));
         passwordEdit.setText(getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
                 .getString(PASSWORD, ""));
+
+        if (!Utils.isStringEmpty(usernameEdit.getText().toString())
+                && !Utils.isStringEmpty(passwordEdit.getText().toString())) {
+            startLoginTask(usernameEdit.getText().toString(), passwordEdit.getText().toString());
+        }
+
     }
 
     private void startLoginTask(String username, String password) {
@@ -137,15 +142,15 @@ public class LoginActivity extends BaseActivity {
                 LoginActivity.this.finish();
             } else {
                 progressToast.error();
-                Utils.showErrorToast(LoginActivity.this, Const.TOAST_LOGIN_FAILED);
+                Utils.showErrorToast(LoginActivity.this, Config.TOAST_LOGIN_FAILED);
             }
             loginBtn.setEnabled(true);
         }
     }
 
     private boolean isLoginSuccess(LoginResp resp) {
-        return (resp.msg.equals(Const.REQ_SUCCESS_MSG))
-                && (resp.code == Const.REQ_SUCCESS_CODE);
+        return (resp.msg.equals(Config.REQ_SUCCESS_MSG))
+                && (resp.code == Config.REQ_SUCCESS_CODE);
     }
 
     private boolean loginVerify(String username, String password) {
@@ -154,7 +159,7 @@ public class LoginActivity extends BaseActivity {
 
     private void progressToastStyle() {
         progressToast.setProgressColor(Color.WHITE);
-        progressToast.setTranslationY(Const.LOAD_TOAST_POS);
+        progressToast.setTranslationY(Config.LOAD_TOAST_POS);
         progressToast.setBackgroundColor(Color.rgb(244,34,6));
     }
 }

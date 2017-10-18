@@ -28,14 +28,12 @@ import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.R;
 import cn.chinaunicom.monitor.adapters.GridAdapter;
 import cn.chinaunicom.monitor.beans.CenterEntity;
-import cn.chinaunicom.monitor.beans.GridInCenter;
-import cn.chinaunicom.monitor.beans.GridItem;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.BaseReq;
 import cn.chinaunicom.monitor.http.Request.GridViewReq;
 import cn.chinaunicom.monitor.http.Response.CenterFlagResp;
 import cn.chinaunicom.monitor.http.Response.GridViewResp;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
 import es.dmoral.toasty.Toasty;
 
@@ -149,8 +147,8 @@ public class MainframeFragment extends Fragment {
 
     private void initTopRigtMenu() {
         menu = new TopRightMenu(getActivity());
-        menu.setHeight(Const.POP_UP_DIALOG_HEIGHT)
-                .setWidth(Const.POP_UP_DIALOG_WIDTH)
+        menu.setHeight(Config.POP_UP_DIALOG_HEIGHT)
+                .setWidth(Config.POP_UP_DIALOG_WIDTH)
                 .dimBackground(true)
                 .needAnimationStyle(true)
                 .setOnMenuItemClickListener(
@@ -248,7 +246,7 @@ public class MainframeFragment extends Fragment {
                 ChinaUnicomApplication.mainframeCenterList.addAll(resp.data.records);
                 initMenuItem(ChinaUnicomApplication.mainframeCenterList);
             } else
-                Toasty.error(getContext(), Const.TOAST_REQUEST_FAILED, Toast.LENGTH_SHORT).show();
+                Toasty.error(getContext(), Config.TOAST_REQUEST_FAILED, Toast.LENGTH_SHORT).show();
         }
     }
 

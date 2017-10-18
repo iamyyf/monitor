@@ -1,6 +1,5 @@
 package cn.chinaunicom.monitor.mainframe;
 
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -13,10 +12,8 @@ import butterknife.OnClick;
 import cn.chinaunicom.monitor.BaseActivity;
 import cn.chinaunicom.monitor.R;
 import cn.chinaunicom.monitor.adapters.ChartsAdapter;
-import cn.chinaunicom.monitor.adapters.MainframeDetailAdapter;
 import cn.chinaunicom.monitor.adapters.MainframeDetailChartAdapter;
-import cn.chinaunicom.monitor.utils.Const;
-import cn.chinaunicom.monitor.utils.Utils;
+import cn.chinaunicom.monitor.utils.Config;
 
 /**
  * @author yfYang
@@ -50,7 +47,7 @@ public class ChartListActivity extends BaseActivity {
     public void initView() {
         getImperativeData();
         initTitleBar();
-        if (itemName.equals(Const.MAINFRAME_DETAIL)) {
+        if (itemName.equals(Config.MAINFRAME_DETAIL)) {
             chartList.setAdapter(new MainframeDetailChartAdapter(this, "["+param1+"]"));
         } else {
             chartList.setAdapter(new ChartsAdapter(this));

@@ -7,31 +7,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.R;
 import cn.chinaunicom.monitor.asynctask.DataSetLineChartAsyncTask;
-import cn.chinaunicom.monitor.asynctask.FourPieChartAsyncTask;
-import cn.chinaunicom.monitor.asynctask.LineChartAsyncTask;
-import cn.chinaunicom.monitor.asynctask.MqBarChartAsyncTask;
-import cn.chinaunicom.monitor.asynctask.OnePieChartAsyncTask;
-import cn.chinaunicom.monitor.asynctask.SixPieChartAsyncTask;
-import cn.chinaunicom.monitor.asynctask.ThreePieChartAsyncTask;
-import cn.chinaunicom.monitor.asynctask.TwoPieChartAsyncTask;
-import cn.chinaunicom.monitor.beans.DataSetChartsEntity;
-import cn.chinaunicom.monitor.http.Request.ChartReq;
 import cn.chinaunicom.monitor.http.Request.DataSetChartsReq;
-import cn.chinaunicom.monitor.utils.Const;
-import cn.chinaunicom.monitor.viewholders.BarChartViewHolder;
-import cn.chinaunicom.monitor.viewholders.BaseViewHolder;
-import cn.chinaunicom.monitor.viewholders.FourPieChartViewHolder;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.viewholders.LineChartViewHolder;
-import cn.chinaunicom.monitor.viewholders.OnePieChartViewHolder;
-import cn.chinaunicom.monitor.viewholders.SixPieChartViewHolder;
-import cn.chinaunicom.monitor.viewholders.ThreePieChartViewHolder;
 import cn.chinaunicom.monitor.viewholders.TopicViewHolder;
-import cn.chinaunicom.monitor.viewholders.TwoPieChartViewHolder;
 
 /**
  * Created by yfyang on 2017/10/11.
@@ -68,13 +51,13 @@ public class DataSetChartsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-        String chartType = Const.OUTGOING;
+        String chartType = Config.OUTGOING;
         switch (position) {
-            case 0: chartType = Const.OUTGOING;break;
-            case 1: chartType = Const.INCOMING;break;
-            case 2: chartType = Const.DISK;break;
-            case 3: chartType = Const.MEMORY;break;
-            case 4: chartType = Const.CPU;
+            case 0: chartType = Config.OUTGOING;break;
+            case 1: chartType = Config.INCOMING;break;
+            case 2: chartType = Config.DISK;break;
+            case 3: chartType = Config.MEMORY;break;
+            case 4: chartType = Config.CPU;
         }
 
         //这里没复用ViewHolder，防止数据不一致

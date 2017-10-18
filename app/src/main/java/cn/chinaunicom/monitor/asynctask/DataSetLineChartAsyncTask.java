@@ -9,11 +9,9 @@ import cn.chinaunicom.monitor.beans.ChartData;
 import cn.chinaunicom.monitor.chart.LineChartStyle;
 import cn.chinaunicom.monitor.chart.charthelper.LineChartHelper;
 import cn.chinaunicom.monitor.http.Http;
-import cn.chinaunicom.monitor.http.Request.ChartReq;
 import cn.chinaunicom.monitor.http.Request.DataSetChartsReq;
-import cn.chinaunicom.monitor.http.Response.ChartResp;
 import cn.chinaunicom.monitor.http.Response.DataSetChartsResp;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
 import cn.chinaunicom.monitor.viewholders.LineChartViewHolder;
 
@@ -56,15 +54,15 @@ public class DataSetLineChartAsyncTask extends AsyncTask<Void, Void, DataSetChar
                     .getLineChartHelper(viewHolder.lineChart, new LineChartStyle());
             if (!Utils.isListEmpty(resp.data.records)) {
                 ChartData data = resp.data.records.get(0).outgoing;
-                if (chartType.equals(Const.OUTGOING)) {
+                if (chartType.equals(Config.OUTGOING)) {
                     data = resp.data.records.get(0).outgoing;
-                } else if (chartType.equals(Const.INCOMING)) {
+                } else if (chartType.equals(Config.INCOMING)) {
                     data = resp.data.records.get(0).incoming;
-                } else if (chartType.equals(Const.DISK)) {
+                } else if (chartType.equals(Config.DISK)) {
                     data = resp.data.records.get(0).disk;
-                } else if (chartType.equals(Const.CPU)) {
+                } else if (chartType.equals(Config.CPU)) {
                     data = resp.data.records.get(0).cpu;
-                } else if (chartType.equals(Const.MEMORY)) {
+                } else if (chartType.equals(Config.MEMORY)) {
                     data = resp.data.records.get(0).memory;
                 }
                 if (!Utils.isListEmpty(data.records)) {
@@ -73,7 +71,7 @@ public class DataSetLineChartAsyncTask extends AsyncTask<Void, Void, DataSetChar
                 }
             }
         } else {
-            //Toasty.error(context, Const.TOAST_REQUEST_FAILED, Toast.LENGTH_SHORT).show();
+            //Toasty.error(context, Config.TOAST_REQUEST_FAILED, Toast.LENGTH_SHORT).show();
         }
         viewHolder.loading.setVisibility(View.GONE);
         viewHolder.chartTitle.setVisibility(View.VISIBLE);

@@ -13,7 +13,7 @@ import com.squareup.okhttp.Response;
 import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 
 /**
  * Created by yfyang on 2017/8/1.
@@ -27,7 +27,7 @@ public class AbstractHttpClient {
     protected AbstractHttpClient(String serverUrl, String sessionId) {
         this.serverUrl = serverUrl;
         this.sessionId = sessionId;
-        Client.setConnectTimeout(Const.HTTP_TIMEOUT, TimeUnit.MILLISECONDS);
+        Client.setConnectTimeout(Config.HTTP_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
     protected String syncOkHttpPost(String actionUrl, String postString) {

@@ -1,15 +1,12 @@
 package cn.chinaunicom.monitor.mainframe;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -27,7 +24,6 @@ import butterknife.OnClick;
 import cn.chinaunicom.monitor.BaseActivity;
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.R;
-import cn.chinaunicom.monitor.adapters.AppCategoryAdapter;
 import cn.chinaunicom.monitor.adapters.DeployListAdapter;
 import cn.chinaunicom.monitor.beans.AppbelongEntity;
 import cn.chinaunicom.monitor.beans.DeployCategoryEntity;
@@ -37,10 +33,8 @@ import cn.chinaunicom.monitor.http.Request.BaseReq;
 import cn.chinaunicom.monitor.http.Request.DeployListReq;
 import cn.chinaunicom.monitor.http.Response.CateAndAppbelongResp;
 import cn.chinaunicom.monitor.http.Response.DeployListResp;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
-
-import static java.security.AccessController.getContext;
 
 public class DeployListActivity extends BaseActivity {
 
@@ -261,7 +255,7 @@ public class DeployListActivity extends BaseActivity {
                 }
 
             } else
-                Utils.showErrorToast(DeployListActivity.this, Const.TOAST_REQUEST_FAILED);
+                Utils.showErrorToast(DeployListActivity.this, Config.TOAST_REQUEST_FAILED);
         }
     }
 
@@ -462,7 +456,7 @@ public class DeployListActivity extends BaseActivity {
                 loadToast.error();
                 appClassEntities.clear();
                 appEntities.clear();
-                Utils.showErrorToast(DeployListActivity.this, Const.TOAST_REQUEST_FAILED);
+                Utils.showErrorToast(DeployListActivity.this, Config.TOAST_REQUEST_FAILED);
             }
             isDeployTaskRunning = false;
             appBelongsSpinner.setEnabled(true);

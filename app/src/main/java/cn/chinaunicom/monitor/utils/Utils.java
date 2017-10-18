@@ -23,7 +23,7 @@ public class Utils {
     }
 
     public static boolean isRequestSuccess(BaseResp resp) {
-        if (null != resp && resp.msg.equals(Const.REQ_SUCCESS_MSG) && resp.code == Const.REQ_SUCCESS_CODE)
+        if (null != resp && resp.msg.equals(Config.REQ_SUCCESS_MSG) && resp.code == Config.REQ_SUCCESS_CODE)
             return true;
         return false;
     }
@@ -52,7 +52,7 @@ public class Utils {
 
     public static void initLoadToast(LoadToast loadToast) {
         loadToast.setProgressColor(Color.WHITE);
-        loadToast.setTranslationY(Const.LOAD_TOAST_POS);
-        loadToast.setBackgroundColor(Color.rgb(244,34,6));
+        loadToast.setTranslationY(Config.LOAD_TOAST_POS);
+        loadToast.setBackgroundColor(Color.rgb(212,59,51));
     }
 }

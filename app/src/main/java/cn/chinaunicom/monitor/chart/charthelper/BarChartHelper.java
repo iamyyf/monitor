@@ -14,8 +14,6 @@ import cn.chinaunicom.monitor.beans.ChartData;
 import cn.chinaunicom.monitor.beans.ChartPoint;
 import cn.chinaunicom.monitor.chart.BarChartStyle;
 import cn.chinaunicom.monitor.chart.XAxisFormatter;
-import cn.chinaunicom.monitor.http.Response.ChartResp;
-import cn.chinaunicom.monitor.utils.Const;
 
 /**
  * Created by yfyang on 2017/8/3.

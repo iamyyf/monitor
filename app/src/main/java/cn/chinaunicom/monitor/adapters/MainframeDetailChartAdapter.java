@@ -8,11 +8,8 @@ import android.widget.BaseAdapter;
 
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.R;
-import cn.chinaunicom.monitor.asynctask.LineChartAsyncTask;
 import cn.chinaunicom.monitor.asynctask.MainframeDetailChartAsyncTask;
 import cn.chinaunicom.monitor.http.Request.MainframeDetailChartReq;
-import cn.chinaunicom.monitor.utils.Const;
-import cn.chinaunicom.monitor.utils.Logger;
 import cn.chinaunicom.monitor.viewholders.LineChartViewHolder;
 
 /**

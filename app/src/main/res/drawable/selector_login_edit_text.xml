@@ -11,7 +11,7 @@
     <item android:state_focused="true">
         <shape>
             <corners android:radius="@dimen/corner_radius"/>
-            <stroke android:color="@color/colorRed" android:width="@dimen/stroke_width"/>
+            <stroke android:color="@color/colorLogoRed" android:width="@dimen/stroke_width"/>
         </shape>
     </item>
 

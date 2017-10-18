@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#F42206</color>
-    <color name="colorPrimaryDark">#F42206</color>
+    <color name="colorPrimary">#D43B33</color>
+    <color name="colorPrimaryDark">#D43B33</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorRed">#F42206</color>
+    <!--<color name="colorRed">#F42206</color>-->
+    <color name="colorRed">#D43B33</color>
+    <color name="colorLogoRed">#D81E06</color>
     <color name="colorDarkRed">#CD000F</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGray">#E7E7E7</color>
     <color name="colorDarkGray">#8A8A8A</color>
+    <color name="colorShadow">#ADADAD</color>
     <color name="colorWhite">#FFFFFF</color>
 
     <color name="TabBkg">#EFEFEF</color>

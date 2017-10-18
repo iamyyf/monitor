@@ -3,9 +3,13 @@ package cn.chinaunicom.monitor.alarm;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -36,7 +40,7 @@ import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.UnCheckAlarmDetailReq;
 import cn.chinaunicom.monitor.http.Response.UnCheckAlarmDetailResp;
 import cn.chinaunicom.monitor.sqlite.AlarmDatabaseHelper;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Logger;
 import cn.chinaunicom.monitor.utils.Utils;
 
@@ -100,13 +104,13 @@ public class AlarmDetailActivity extends BaseActivity {
     }
 
     private void initDB() {
-        dbHelper = new AlarmDatabaseHelper(this, Const.DB_NAME, null, Const.DB_VERSION);
+        dbHelper = new AlarmDatabaseHelper(this, Config.DB_NAME, null, Config.DB_VERSION);
         db = dbHelper.getWritableDatabase();
     }
 
     private void getAlarmDtailFromDB() {
         alarmDetailEntities.clear();
-        Cursor cursor = db.query("ALARM", Const.ALARM_COLUMN, "category=? and center_id=?",
+        Cursor cursor = db.query("ALARM", Config.ALARM_COLUMN, "category=? and center_id=?",
                 new String[]{alarmCategoryTitle, alarmCenterId}, null, null, "send_time desc");
         while (cursor.moveToNext()) {
             AlarmDetailEntity e = new AlarmDetailEntity();
@@ -147,7 +151,7 @@ public class AlarmDetailActivity extends BaseActivity {
     }
 
     class UnCheckAlarmDetailTask extends AsyncTask<Void, Void, UnCheckAlarmDetailResp> {
-        //private LoadToast loadToast = new LoadToast(AlarmDetailActivity.this);
+        private LoadToast loadToast = new LoadToast(AlarmDetailActivity.this);
         private UnCheckAlarmDetailReq req = new UnCheckAlarmDetailReq();
         @Override
         protected void onPreExecute() {
@@ -157,8 +161,8 @@ public class AlarmDetailActivity extends BaseActivity {
             req.centerId = alarmCenterId;
             req.userToken = ChinaUnicomApplication.token;
             isAlarmDtailTaskRunning = true;
-           //Utils.initLoadToast(loadToast);
-            //loadToast.show();
+            Utils.initLoadToast(loadToast);
+            loadToast.show();
         }
 
         @Override
@@ -183,11 +187,10 @@ public class AlarmDetailActivity extends BaseActivity {
                         db.insert("ALARM", null, values);
                     }
                 }
-
-                //loadToast.success();
+                loadToast.success();
             } else {
-                //loadToast.error();
-                Utils.showErrorToast(AlarmDetailActivity.this, Const.TOAST_REQUEST_FAILED);
+                loadToast.error();
+                Utils.showErrorToast(AlarmDetailActivity.this, "未查看告警请求失败");
             }
             //把所有告警统一写入数据库后一起从数据库读出
             getAlarmDtailFromDB();
@@ -203,6 +206,12 @@ public class AlarmDetailActivity extends BaseActivity {
 
         @Bind(R.id.alarmContent)
         TextView alarmContent;
+
+        @Bind(R.id.alarmTitle)
+        TextView alarmTitle;
+
+        @Bind(R.id.alarmCenter)
+        TextView alarmCenter;
 
         public AlarmDetailViewHolder(View view) {
             ButterKnife.bind(this, view);
@@ -245,13 +254,31 @@ public class AlarmDetailActivity extends BaseActivity {
             List<String> keyOrder
                     = (ArrayList<String>)jsonToObj(entity.jsonList, new TypeToken<ArrayList<String>>(){}.getType());
             StringBuilder sb = new StringBuilder();
+            StringBuilder strAlarmTitle = new StringBuilder();
+            int beginIndex = -1;
+            int endIndex = -1;
             for (String key : keyOrder) {
-                if (infoMap.containsKey(key)) {
+                if (infoMap.containsKey(key) && !key.equals("problem")) {
                     sb.append(getItemName(key) + ":  " + infoMap.get(key) + "\n\n");
+                    if (key.equals("curValue")) {
+                        endIndex = sb.length() - 2;
+                        beginIndex = endIndex - (""+infoMap.get(key)).length();
+                    }
+                } else if (infoMap.containsKey(key) && key.equals("problem")) {
+                    strAlarmTitle.append(getItemName(key) + ":  " + infoMap.get(key));
                 }
             }
-            //去掉最后两个换行
-            viewHolder.alarmContent.setText(sb.substring(0, sb.length()-2));
+            if (beginIndex != endIndex && beginIndex != -1) {
+                Logger.e("INDEX", beginIndex + ":::" + endIndex);
+                Spannable s = new SpannableString(sb.substring(0, sb.length() - 2));
+                s.setSpan(new ForegroundColorSpan(Color.RED), beginIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                //去掉最后两个换行
+                viewHolder.alarmContent.setText(s);
+            } else {
+                viewHolder.alarmContent.setText(sb.substring(0, sb.length() - 2));
+            }
+            viewHolder.alarmTitle.setText(strAlarmTitle.toString());
+            viewHolder.alarmCenter.setText(ChinaUnicomApplication.alarmCurCenter.title);
 
             return convertView;
         }
@@ -259,7 +286,7 @@ public class AlarmDetailActivity extends BaseActivity {
 
     private String formatTime(long seconds) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        return sdf.format(seconds);
+        return " " + sdf.format(seconds) + " ";
     }
 
     private Object jsonToObj(String jsonString, Type type) {

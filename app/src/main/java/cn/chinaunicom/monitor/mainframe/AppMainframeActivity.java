@@ -1,12 +1,10 @@
 package cn.chinaunicom.monitor.mainframe;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -29,7 +27,7 @@ import cn.chinaunicom.monitor.beans.MainframeEntity;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.MainframeListReq;
 import cn.chinaunicom.monitor.http.Response.MainframeListResp;
-import cn.chinaunicom.monitor.utils.Const;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
 
 /**
@@ -142,7 +140,7 @@ public class AppMainframeActivity extends BaseActivity {
 
         private void initLoadToast(LoadToast loadToast) {
             loadToast.setProgressColor(Color.WHITE);
-            loadToast.setTranslationY(Const.LOAD_TOAST_POS);
+            loadToast.setTranslationY(Config.LOAD_TOAST_POS);
             loadToast.setBackgroundColor(Color.rgb(244,34,6));
         }
 
@@ -174,7 +172,7 @@ public class AppMainframeActivity extends BaseActivity {
                 mainframeList.setAdapter(new MainframeListAdapter(AppMainframeActivity.this, mainframeEntities));
             } else {
                 loadToast.error();
-                Utils.showErrorToast(AppMainframeActivity.this, Const.TOAST_REQUEST_FAILED);
+                Utils.showErrorToast(AppMainframeActivity.this, Config.TOAST_REQUEST_FAILED);
             }
             isMainframeListTaskRunning = false;
         }

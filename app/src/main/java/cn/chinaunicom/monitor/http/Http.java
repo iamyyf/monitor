@@ -9,7 +9,6 @@ import cn.chinaunicom.monitor.http.Request.DataSetIpReq;
 import cn.chinaunicom.monitor.http.Request.GridViewReq;
 import cn.chinaunicom.monitor.http.Request.LogoutReq;
 import cn.chinaunicom.monitor.http.Request.MainframeDetailChartReq;
-import cn.chinaunicom.monitor.http.Request.PieChartReq;
 import cn.chinaunicom.monitor.http.Request.UnCheckAlarmDetailReq;
 import cn.chinaunicom.monitor.http.Request.ChartReq;
 import cn.chinaunicom.monitor.http.Request.DeployListReq;
@@ -17,7 +16,6 @@ import cn.chinaunicom.monitor.http.Request.JPushAliasReq;
 import cn.chinaunicom.monitor.http.Request.LoginReq;
 import cn.chinaunicom.monitor.http.Request.MainframeDetailReq;
 import cn.chinaunicom.monitor.http.Request.MainframeListReq;
-import cn.chinaunicom.monitor.http.Response.BaseResp;
 import cn.chinaunicom.monitor.http.Response.DataSetChartsResp;
 import cn.chinaunicom.monitor.http.Response.DataSetIpResp;
 import cn.chinaunicom.monitor.http.Response.GridViewResp;
@@ -34,8 +32,7 @@ import cn.chinaunicom.monitor.http.Response.LoginResp;
 import cn.chinaunicom.monitor.http.Response.MainframeDetailResp;
 import cn.chinaunicom.monitor.http.Response.MainframeListResp;
 import cn.chinaunicom.monitor.http.Response.PieChartResp;
-import cn.chinaunicom.monitor.utils.Const;
-import cn.chinaunicom.monitor.utils.Logger;
+import cn.chinaunicom.monitor.utils.Config;
 
 /**
  * Created by yfyang on 2017/8/3.
@@ -140,11 +137,11 @@ public class Http extends AbstractHttpClient{
 
     public static class Builder {
         public Http create() {
-            return new Http(Const.HTTP_SERVER_URL, "");
+            return new Http(Config.HTTP_SERVER_URL, "");
         }
 
         public Http create(String sessionId) {
-            return new Http(Const.HTTP_SERVER_URL, sessionId);
+            return new Http(Config.HTTP_SERVER_URL, sessionId);
         }
 
         public Http create(String serverUrl, String sessionId) {
