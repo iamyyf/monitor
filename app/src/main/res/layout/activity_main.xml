@@ -32,6 +32,12 @@
             android:text="@string/alarm" />
 
         <RadioButton
+            android:id="@+id/mainTabConsole"
+            style="@style/StyleMainMenu"
+            android:drawableTop="@drawable/selector_main_tab_bar_console"
+            android:text="@string/console" />
+
+        <RadioButton
             android:id="@+id/mainTabMine"
             style="@style/StyleMainMenu"
             android:drawableTop="@drawable/selector_main_tab_bar_mine"
@@ -53,8 +59,8 @@
             android:layout_width="@dimen/margin_0"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginLeft="@dimen/margin_32"
-            android:layout_marginRight="@dimen/margin_32"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
             android:visibility="invisible"/>
 
 
@@ -63,8 +69,17 @@
             android:layout_width="@dimen/margin_0"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginLeft="@dimen/margin_32"
-            android:layout_marginRight="@dimen/margin_32"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/mainTabConsoleBtn"
+            android:layout_width="@dimen/margin_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
             android:visibility="invisible"/>
 
 
@@ -73,8 +88,8 @@
             android:layout_width="@dimen/margin_0"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginLeft="@dimen/margin_32"
-            android:layout_marginRight="@dimen/margin_32"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
             android:visibility="invisible"/>
 
     </LinearLayout>

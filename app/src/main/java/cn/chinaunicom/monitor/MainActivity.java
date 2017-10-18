@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import cn.chinaunicom.monitor.alarm.AlarmFragment;
 import cn.chinaunicom.monitor.asynctask.UnCheckAlarmCategoryTask;
 import cn.chinaunicom.monitor.callback.TabBarBadgeCallBack;
+import cn.chinaunicom.monitor.console.ConsoleFragment;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.JPushAliasReq;
 import cn.chinaunicom.monitor.http.Response.JPushAliasResp;
@@ -149,6 +150,12 @@ public class  MainActivity extends BaseFragmentActivity implements TabBarBadgeCa
             @Override
             Fragment getFragment() {
                 return AlarmFragment.getInstance();
+            }
+        },
+        Console(R.id.mainTabConsole, "Console") {
+            @Override
+            Fragment getFragment() {
+                return ConsoleFragment.getInstance();
             }
         },
         Mine(R.id.mainTabMine, "Mine") {

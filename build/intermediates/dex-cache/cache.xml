@@ -2,33 +2,6 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="E:\AndroidWorkspace\monitor\app\libs\badgeview.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="6301e7214e651730acacf9815ac3a56701231015">
-        <dex dex="E:\AndroidWorkspace\monitor\app\build\intermediates\transforms\dex\debug\folders\1000\2\badgeview_93bfb8328f99792801ba82bf2f8376583ebcaa92\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="E:\AndroidWorkspace\monitor\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="E:\AndroidWorkspace\monitor\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_6b3478818fc9a6799f0d1ab7deb192aa90197bec\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="E:\AndroidWorkspace\monitor\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="5c554a3dcaa9ebe34ae4d29269f06c5788dfc7af">
-        <dex dex="E:\AndroidWorkspace\monitor\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_da4a59948ecbf6d4a7056c02202ce68b7c46f77e\classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="C:\Users\yfYang\.android\build-cache\cd00e0914d0b17af1ee647fe80d7dcf3794197b0\output\jars\classes.jar"
         jumboMode="false"
