@@ -285,8 +285,8 @@ public class AlarmDetailActivity extends BaseActivity {
     }
 
     private String formatTime(long seconds) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        return " " + sdf.format(seconds) + " ";
+        SimpleDateFormat sdf = new SimpleDateFormat(" yyyy/MM/dd   HH:mm:ss ");
+        return sdf.format(seconds);
     }
 
     private Object jsonToObj(String jsonString, Type type) {

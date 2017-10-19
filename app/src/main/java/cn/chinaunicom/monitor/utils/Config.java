@@ -8,7 +8,7 @@ import cn.chinaunicom.monitor.R;
 
 public class Config {
     //网络相关
-    public static final String HTTP_SERVER_URL  = "http://120.52.49.69:9701";       //Server地址
+    public static final String HTTP_SERVER_URL  = "http://120.52.49.69:9701 ";       //Server地址
     //public static final String HTTP_SERVER_URL  = "http://172.16.4.59:8080";        //lpy
     public static final int HTTP_TIMEOUT          = 10000;                            //超时时间
     public static final String REQ_SUCCESS_MSG    ="OK";                              //请求成功msg

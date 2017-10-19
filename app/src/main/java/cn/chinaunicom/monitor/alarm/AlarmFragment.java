@@ -132,7 +132,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
         imgRightBtnBadgeView = new BadgeView(getActivity());
         imgRightBtnBadgeView.setTargetView(imgBtnRight);
         imgRightBtnBadgeView.getBackground().setAlpha(0);
-        imgRightBtnBadgeView.setTextColor(Color.rgb(139, 34, 82));
+        imgRightBtnBadgeView.setTextColor(Color.rgb(205, 175, 149));
         imgRightBtnBadgeView.setBadgeGravity(Gravity.TOP | Gravity.RIGHT );
 
         Cursor uncheckCenterCursor = db.query("CENTER", Config.CENTER_COLUMN,
