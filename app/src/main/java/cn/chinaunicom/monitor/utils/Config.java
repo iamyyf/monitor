@@ -8,8 +8,8 @@ import cn.chinaunicom.monitor.R;
 
 public class Config {
     //网络相关
-    public static final String HTTP_SERVER_URL  = "http://120.52.49.69:9701 ";       //Server地址
-    //public static final String HTTP_SERVER_URL  = "http://172.16.4.59:8080";        //lpy
+    //public static final String HTTP_SERVER_URL  = "http://120.52.49.69:9701";       //Server地址
+    public static final String HTTP_SERVER_URL  = "http://172.16.4.59:8080";        //lpy
     public static final int HTTP_TIMEOUT          = 10000;                            //超时时间
     public static final String REQ_SUCCESS_MSG    ="OK";                              //请求成功msg
     public static final int REQ_SUCCESS_CODE      = 0;                                //请求成功code
@@ -61,6 +61,12 @@ public class Config {
 
     public final static String[] CENTER_COLUMN                                  //中心
             = {"id", "center_name", "center_id", "is_uncheck"};
+
+    public final static String[] REPORT_COLUMN
+            ={"id", "center_name", "center_id", "report_content", "send_time", "is_uncheck"};
+
+    public final static String[] REPORT_CENTER_COLUMN
+            ={"id", "center_name", "center_id", "is_uncheck"};
 
     //极光推送
     public final static String CHECK_REPORT = "晨检报告";

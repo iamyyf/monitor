@@ -187,7 +187,11 @@
             android:name="JPUSH_APPKEY"
             android:value="93db228f9819d14c58aabe6e" />
 
-        <activity android:name=".mainframe.DataSetChartActivity"></activity>
+        <activity android:name=".mainframe.DataSetChartActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".mine.ReportListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".mine.ReportActivity" />
     </application>
 
 </manifest>

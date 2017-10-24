@@ -38,7 +38,21 @@ public class AlarmDatabaseHelper extends SQLiteOpenHelper {
             "id integer primary key autoincrement," +
             "center_name text," +
             "center_id text," +
-            "is_uncheck int)"; //1:有新消息 0：没有
+            "is_uncheck integer)"; //1:有新消息 0：没有
+
+    private static final String CREATE_REPORT_TABLE = "create table REPORT (" +
+            "id integer primary key autoincrement," +
+            "center_name text," +
+            "center_id text," +
+            "report_content text," +
+            "send_time integer," +
+            "is_uncheck integer)"; //1:未读 0：已读
+
+    private static final String CREATE_REPORT_CENTER_TABLE = "create table REPORT_CENTER (" +
+            "id integer primary key autoincrement," +
+            "center_name text," +
+            "center_id text," +
+            "is_uncheck integer)";
 
     public AlarmDatabaseHelper(Context context, String name, CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -49,6 +63,8 @@ public class AlarmDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_ALARM_CATEGORY);
         db.execSQL(CREATE_ALARM_TABLE);
         db.execSQL(CREATE_CENTER_TABLE);
+        db.execSQL(CREATE_REPORT_TABLE);
+        db.execSQL(CREATE_REPORT_CENTER_TABLE);
     }
 
     @Override

@@ -9,6 +9,7 @@ import cn.chinaunicom.monitor.http.Request.DataSetIpReq;
 import cn.chinaunicom.monitor.http.Request.GridViewReq;
 import cn.chinaunicom.monitor.http.Request.LogoutReq;
 import cn.chinaunicom.monitor.http.Request.MainframeDetailChartReq;
+import cn.chinaunicom.monitor.http.Request.ReportsReq;
 import cn.chinaunicom.monitor.http.Request.UnCheckAlarmDetailReq;
 import cn.chinaunicom.monitor.http.Request.ChartReq;
 import cn.chinaunicom.monitor.http.Request.DeployListReq;
@@ -20,6 +21,7 @@ import cn.chinaunicom.monitor.http.Response.DataSetChartsResp;
 import cn.chinaunicom.monitor.http.Response.DataSetIpResp;
 import cn.chinaunicom.monitor.http.Response.GridViewResp;
 import cn.chinaunicom.monitor.http.Response.LogoutResp;
+import cn.chinaunicom.monitor.http.Response.ReportsResp;
 import cn.chinaunicom.monitor.http.Response.UnCheckAlarmCategoryResp;
 import cn.chinaunicom.monitor.http.Response.UnCheckAlarmDetailResp;
 import cn.chinaunicom.monitor.http.Response.CateAndAppbelongResp;
@@ -132,6 +134,11 @@ public class Http extends AbstractHttpClient{
     public DataSetChartsResp getDataSetCharts(DataSetChartsReq req) {
         String postString = new Gson().toJson(req);
         return syncOkHttpPost(ActionType.DataSetCharts.actionUrl, postString, DataSetChartsResp.class);
+    }
+
+    public ReportsResp getReports(ReportsReq req) {
+        String postString = new Gson().toJson(req);
+        return syncOkHttpPost(ActionType.Reports.actionUrl, postString, ReportsResp.class);
     }
 
 

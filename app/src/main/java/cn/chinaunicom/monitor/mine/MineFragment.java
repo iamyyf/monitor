@@ -68,7 +68,8 @@ public class MineFragment extends Fragment {
 
     @OnClick(R.id.report)
     void report() {
-        Utils.showInfoToast(getActivity(), "建设中...");
+        Intent intent = new Intent(getActivity(), ReportListActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.guide)

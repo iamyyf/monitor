@@ -38,6 +38,7 @@ public class ChinaUnicomApplication extends Application {
     public static List<CenterEntity> mainframeCenterList = new ArrayList<>();
     public static List<GridItem> mainframeCurGrid = new ArrayList<>();
     public static List<CellEntity> curChartCells = new ArrayList<>();
+    public static List<Long> reportsIds = new ArrayList<>(); //晨检报告的id
 
     @Override
     public void onCreate() {

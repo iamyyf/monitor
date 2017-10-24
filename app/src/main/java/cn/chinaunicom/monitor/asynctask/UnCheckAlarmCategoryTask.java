@@ -91,7 +91,7 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
     @Override
     protected void onPostExecute(UnCheckAlarmCategoryResp resp) {
         super.onPostExecute(resp);
-            if (!Utils.isListEmpty(resp.data.records)) {
+            if (!Utils.isListEmpty(resp.data.warningMsgRecords)) {
 
                 //回调接口处理AlarmFragment右上角的圆点显示
                 if (null != AlarmFragment.instance) {
@@ -106,9 +106,9 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
                 //将中心信息存到List中，便于弹出对话框使用
 
                 //records是中心信息
-                for (int centerNum = 0; centerNum < resp.data.records.size(); centerNum++) {
-                    String centerName = resp.data.records.get(centerNum).centerName;
-                    String centerId = resp.data.records.get(centerNum).centerId;
+                for (int centerNum = 0; centerNum < resp.data.warningMsgRecords.size(); centerNum++) {
+                    String centerName = resp.data.warningMsgRecords.get(centerNum).centerName;
+                    String centerId = resp.data.warningMsgRecords.get(centerNum).centerId;
                     Cursor uncheckCenterCursor = db.query("CENTER", Config.CENTER_COLUMN,
                             "center_name=? and center_id=?", new String[]{centerName, centerId}, null, null, null);
                     //如果之前这个中心有未读消息，则更新is_uncheck字段，否则插入新内容
@@ -133,14 +133,14 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
 
                     ChinaUnicomApplication.unCheckAlarmCategories.clear();
                     //records里面的records列表存的是每一个中心下的告警类别
-                    ChinaUnicomApplication.unCheckAlarmCategories.addAll(resp.data.records.get(centerNum).records);
+                    ChinaUnicomApplication.unCheckAlarmCategories.addAll(resp.data.warningMsgRecords.get(centerNum).records);
                     for (int cateNum = 0; cateNum < ChinaUnicomApplication.unCheckAlarmCategories.size(); cateNum++) {
                         String cateName = ChinaUnicomApplication.unCheckAlarmCategories.get(cateNum).title;
                         String latestContent = ChinaUnicomApplication.unCheckAlarmCategories.get(cateNum).mesContent;
                         long latestTime = ChinaUnicomApplication.unCheckAlarmCategories.get(cateNum).sendTime;
                         String column = ChinaUnicomApplication.unCheckAlarmCategories.get(cateNum).column;
                         int cateAlarmCnt = ChinaUnicomApplication.unCheckAlarmCategories.get(cateNum).value;
-                        String cateCenterId = resp.data.records.get(centerNum).centerId;
+                        String cateCenterId = resp.data.warningMsgRecords.get(centerNum).centerId;
                         //查询未查看的类别中是否有新请求到的类别
                         Cursor uncheckCateCursor = db.query("ALARM_CATEGORY", Config.ALARM_CATEGORY_COLUMN,
                                 "category=? and center_id=?", new String[]{cateName, cateCenterId}, null, null, null);
@@ -171,6 +171,12 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
                 MainActivity.instance.updateBadge();
                 if (null != AlarmFragment.instance)
                     AlarmFragment.instance.title.setText(ChinaUnicomApplication.alarmCurCenter.title + "-告警");
+        }
+
+        if (!Utils.isListEmpty(resp.data.reportIds)) {
+            ChinaUnicomApplication.reportsIds.clear();
+            ChinaUnicomApplication.reportsIds.addAll(resp.data.reportIds);
+            //TODO:更新红点逻辑，用回调
         }
     }
 }

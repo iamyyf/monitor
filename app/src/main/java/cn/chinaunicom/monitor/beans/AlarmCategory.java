@@ -8,10 +8,13 @@ import java.util.Map;
  */
 
 public class AlarmCategory {
-    public List<AlarmCategoryCenterEntity> records; //warningMsgRecords
-    public int recordCount;                         //warningMsgCount
+    public List<AlarmCategoryCenterEntity> warningMsgRecords; //warningMsgRecords
+    public int warningMsgCount;                         //warningMsgCount
+
+//    public List<AlarmCategoryCenterEntity> records; //warningMsgRecords
+//    public int recordCount;                         //warningMsgCount
     public int badge;
 
-    public List<ReportEntity> reports;
-    public int reportCount;
+    public List<Long> reportIds;
+    public int reportIdCount;
 }

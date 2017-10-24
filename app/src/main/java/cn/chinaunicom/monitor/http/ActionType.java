@@ -15,13 +15,15 @@ public enum  ActionType {
     DeployCateAndAppbelong("/openapi/hsf/dropappvalue"),        //部署情况中应用归属和应用大类
     DeployList("/openapi/hsf/searchAllApp"),                    //部署情况列表
     MainframeDetail("/openapi/zabbix/itemsbyhost"),             //主机详情
-    AlarmCategory("/openapi/pushmsg/unchecklastdata"),          //告警分类
+    //AlarmCategory("/openapi/pushmsg/unchecklastdata"),          //告警分类
+    AlarmCategory("/openapi/notification/getcontents"),          //告警分类
     PostJPushAlias("/openapi/pushmsg/getandroidtoken"),         //向服务器推送JPush需要的别名 Alias
     UnCheckAlarmDetail("/openapi/pushmsg/uncheckdata"),         //获得未查看的告警信息，请求之后才会加到历史告警里面
     GridInCenter("/openapi/zabbix/reqparams"),                  //下载所有图的参数，以及每个中心的gridview
     Logout("/openapi/androidlogout"),                           //登出
     DataSetIp("/openapi/zabbix/hosts"),                         //数据归集IP
-    DataSetCharts("/openapi/zabbix/hostdata");                  //数据归集折线图
+    DataSetCharts("/openapi/zabbix/hostdata"),                  //数据归集折线图
+    Reports("/openapi/androidgetreports");                      //晨检报告
 
     public final String actionUrl;
 

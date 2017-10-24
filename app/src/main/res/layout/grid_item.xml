@@ -11,8 +11,7 @@
         android:id="@+id/gridIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerInside"
-        android:src="@mipmap/ic_mainframe"/>
+        android:scaleType="centerInside" />
 
     <TextView
         android:id="@+id/gridItemName"
