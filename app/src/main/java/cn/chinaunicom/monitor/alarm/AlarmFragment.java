@@ -216,7 +216,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
                 ChinaUnicomApplication.alarmCategoryAdapter.notifyDataSetChanged();
                 title.setText("暂无告警记录");
             }
-            removeTopRightPoint();
+            updateTopRightPoint();
         } else {
             //把游标移动到第一条记录之前
             centerCursor.moveToPrevious();
@@ -231,7 +231,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
                             new String[]{ChinaUnicomApplication.alarmCurCenter.title,
                                     ChinaUnicomApplication.alarmCurCenter.itemId});
                     uncheckCenterMap.remove(ChinaUnicomApplication.alarmCurCenter.title);
-                    removeTopRightPoint();
+                    updateTopRightPoint();
                 }
             }
         }
@@ -239,8 +239,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
         centerCursor.close();
     }
 
-    private void removeTopRightPoint() {
-        //TODO:
+    private void updateTopRightPoint() {
         if (!uncheckCenterMap.isEmpty()) {
             imgRightBtnBadgeView.setText("●");
         } else {
@@ -316,7 +315,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
                                         new String[]{curCategoryEntity.title, ChinaUnicomApplication.alarmCurCenter.itemId});
 
                                 //更新Tab告警的红点
-                                MainActivity.instance.updateBadge();
+                                MainActivity.instance.updateAlarmBadge();
                                 //移除中心列表里相应中心的红点提示
                                 removeCenterRedPoint();
                                 ChinaUnicomApplication.alarmCategoryAdapter.notifyDataSetChanged();
@@ -347,7 +346,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
                 db.update("ALARM_CATEGORY", values,"category=? and center_id=?",
                         new String[]{curCategoryEntity.title, ChinaUnicomApplication.alarmCurCenter.itemId});
                 //更新Tab告警的红点
-                MainActivity.instance.updateBadge();
+                MainActivity.instance.updateAlarmBadge();
                 //移除中心列表里相应中心的红点提示
                 removeCenterRedPoint();
                 startActivity(intent);

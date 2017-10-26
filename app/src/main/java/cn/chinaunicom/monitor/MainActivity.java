@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.RadioGroup;
 
@@ -52,6 +54,7 @@ public class  MainActivity extends BaseFragmentActivity implements TabBarBadgeCa
     public static final boolean isForeground = true;
     public static MainActivity instance = null;
     private BadgeView alarmBadge = null;
+    private BadgeView mineBadge = null;
     private AlarmDatabaseHelper dbHelper;
     private SQLiteDatabase db;
 
@@ -62,6 +65,11 @@ public class  MainActivity extends BaseFragmentActivity implements TabBarBadgeCa
 
     @Bind(R.id.mainTabAlarmBtn)
     Button mainTabAlarmBtn;
+
+    @Bind(R.id.mainTabMineBtn)
+    Button mainTabMineBtn;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,15 +97,29 @@ public class  MainActivity extends BaseFragmentActivity implements TabBarBadgeCa
     }
 
     @Override
-    public void updateBadge() {
+    public void updateAlarmBadge() {
         queryUnCheckAlarmCnt();
         alarmBadge.setBadgeCount(uncheckAlarmCnt);
+    }
+
+    @Override
+    public void updateMineBadge() {
+        if (!Utils.isListEmpty(ChinaUnicomApplication.reportsIds))
+            mineBadge.setText("●");
+        else
+            mineBadge.setBadgeCount(0);
     }
 
     private void initInstances() {
         instance = this;
         alarmBadge = new BadgeView(this);
         alarmBadge.setTargetView(mainTabAlarmBtn);
+
+        mineBadge = new BadgeView(MainActivity.this);
+        mineBadge.getBackground().setAlpha(0);
+        mineBadge.setTextColor(Color.RED);
+        mineBadge.setBadgeGravity(Gravity.TOP | Gravity.RIGHT );
+        mineBadge.setTargetView(mainTabMineBtn);
     }
 
     private void initDB() {

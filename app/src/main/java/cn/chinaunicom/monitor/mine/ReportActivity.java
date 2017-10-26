@@ -60,6 +60,7 @@ public class ReportActivity extends BaseActivity {
         if (!Utils.isStringEmpty(htmlData)) {
             reportView.getSettings().setUseWideViewPort(true);
             reportView.getSettings().setLoadWithOverviewMode(true);
+            reportView.getSettings().setBuiltInZoomControls(true);
             reportView.loadData(htmlData, "text/html; charset=UTF-8", null);
         }
     }

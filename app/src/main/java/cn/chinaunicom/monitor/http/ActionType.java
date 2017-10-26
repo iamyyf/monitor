@@ -23,7 +23,11 @@ public enum  ActionType {
     Logout("/openapi/androidlogout"),                           //登出
     DataSetIp("/openapi/zabbix/hosts"),                         //数据归集IP
     DataSetCharts("/openapi/zabbix/hostdata"),                  //数据归集折线图
-    Reports("/openapi/androidgetreports");                      //晨检报告
+    Reports("/openapi/androidgetreports"),                      //晨检报告
+
+    //测试接口
+    ConnectHost("/openapi/connecthost"),                            //链接主机
+    ExcuteCommand("/openapi/excutecommand");                    //执行命令
 
     public final String actionUrl;
 

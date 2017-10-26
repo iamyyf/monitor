@@ -5,14 +5,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.jauker.widget.BadgeView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,6 +25,7 @@ import butterknife.OnClick;
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.MainActivity;
 import cn.chinaunicom.monitor.R;
+import cn.chinaunicom.monitor.callback.FragmentCallback;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.LogoutReq;
 import cn.chinaunicom.monitor.http.Response.LogoutResp;
@@ -29,7 +35,7 @@ import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
 
 
-public class MineFragment extends Fragment {
+public class MineFragment extends Fragment implements FragmentCallback {
 
     private AlarmDatabaseHelper dbHelper;
     private SQLiteDatabase db;
@@ -37,6 +43,8 @@ public class MineFragment extends Fragment {
     private final String SHARED_PREFERENCES_NAME = "USER_INFO";
     private final String USER_NAME = "USERNAME";
     private final String PASSWORD = "PASSWORD";
+
+    public static MineFragment instance = null;
 
     @Bind(R.id.userNameTextView)
     TextView userName;
@@ -65,6 +73,9 @@ public class MineFragment extends Fragment {
     void help() {
         Utils.showInfoToast(getActivity(), "建设中...");
     }
+
+    @Bind(R.id.report)
+    TextView reportTextView;
 
     @OnClick(R.id.report)
     void report() {
@@ -116,7 +127,6 @@ public class MineFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -124,6 +134,7 @@ public class MineFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
+        initInstance();
         initDB();
         initView();
         return view;
@@ -133,7 +144,10 @@ public class MineFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         db.close();
+        instance = null;
     }
+
+
 
     private void clearUserInfo() {
         SharedPreferences preferences =
@@ -151,6 +165,7 @@ public class MineFragment extends Fragment {
 
     private void initView() {
         initTitleBar();
+        updateReportBadage();
         userName.setText(ChinaUnicomApplication.userName);
     }
 
@@ -158,16 +173,31 @@ public class MineFragment extends Fragment {
         title.setText("我");
     }
 
+    private void initInstance() {
+        instance = MineFragment.this;
+    }
+
     private void clearAlarmBuffer() {
         db.delete("ALARM", null, null);
         db.delete("CENTER", null, null);
         db.delete("ALARM_CATEGORY", null, null);
-        MainActivity.instance.updateBadge();
+        MainActivity.instance.updateAlarmBadge();
         Utils.showSuccessToast(getActivity(), "缓存清除成功");
     }
     private void startLogoutTask() {
         LogoutTask task = new LogoutTask();
         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+    }
+
+    @Override
+    public void updateReportBadage() {
+        if (!Utils.isListEmpty(ChinaUnicomApplication.reportsIds)) {
+            String reportTitle = "晨检报告  <font color ='#ff0000'>●</font>";
+            reportTextView.setText(Html.fromHtml(reportTitle));
+        }
+        else
+            reportTextView.setText("晨检报告");
+
     }
 
     class LogoutTask extends AsyncTask<Void, Void, LogoutResp> {

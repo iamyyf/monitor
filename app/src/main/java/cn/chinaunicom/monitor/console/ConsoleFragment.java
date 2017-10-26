@@ -1,8 +1,10 @@
 package cn.chinaunicom.monitor.console;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +12,37 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.R;
+import cn.chinaunicom.monitor.http.Http;
+import cn.chinaunicom.monitor.http.Request.ConnectHostReq;
+import cn.chinaunicom.monitor.http.Request.ExcuteCommandReq;
+import cn.chinaunicom.monitor.http.Response.BaseResp;
+import cn.chinaunicom.monitor.http.Response.ExcuteCommandResp;
+import cn.chinaunicom.monitor.utils.Logger;
+import cn.chinaunicom.monitor.utils.Utils;
 
 public class ConsoleFragment extends Fragment {
 
     @Bind(R.id.txtViewTitle)
     TextView title;
+
+    @OnClick(R.id.connect)
+    void connect() {
+        startConnectHostTask();
+    }
+
+    @OnClick(R.id.ls)
+    void ls() {
+        startExcuteCommandTask("ls -l");
+    }
+
+    @OnClick(R.id.cd)
+    void cd() {
+        startExcuteCommandTask("cd /root/lpy");
+    }
+
 
     public ConsoleFragment() {
         // Required empty public constructor
@@ -44,6 +71,78 @@ public class ConsoleFragment extends Fragment {
 
     private void initView() {
         title.setText("控制台");
+    }
+
+    private void startConnectHostTask() {
+        ConnectHostTask task = new ConnectHostTask();
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+    }
+
+    private void startExcuteCommandTask(String command) {
+        ExcuteCommandTask task = new ExcuteCommandTask(command);
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+    }
+
+    class ConnectHostTask extends AsyncTask<Void, Void, BaseResp> {
+        ConnectHostReq req;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            req = new ConnectHostReq();
+            req.userToken = ChinaUnicomApplication.token;
+            req.userName = ChinaUnicomApplication.userName;
+        }
+
+        @Override
+        protected BaseResp doInBackground(Void... params) {
+            BaseResp resp = new Http.Builder().create().connectHost(req);
+            return resp;
+        }
+
+        @Override
+        protected void onPostExecute(BaseResp resp) {
+            super.onPostExecute(resp);
+            if (Utils.isRequestSuccess(resp)) {
+                Utils.showSuccessToast(getActivity(), "链接成功...");
+            } else {
+                Utils.showErrorToast(getActivity(), "链接失败...");
+            }
+        }
+    }
+
+    class ExcuteCommandTask extends AsyncTask<Void, Void, ExcuteCommandResp> {
+        ExcuteCommandReq req;
+        String command;
+        public ExcuteCommandTask(String command) {
+            this.command = command;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            req = new ExcuteCommandReq();
+            req.userToken = ChinaUnicomApplication.token;
+            req.userName = ChinaUnicomApplication.userName;
+            req.command = command;
+        }
+
+        @Override
+        protected ExcuteCommandResp doInBackground(Void... params) {
+            ExcuteCommandResp resp = new Http.Builder().create().excuteCommand(req);
+            return resp;
+        }
+
+        @Override
+        protected void onPostExecute(ExcuteCommandResp resp) {
+            super.onPostExecute(resp);
+            if (Utils.isRequestSuccess(resp)) {
+                String res = new String(Base64.decode(resp.data.result, Base64.DEFAULT));
+                Logger.e("CONSOLE", res);
+                Utils.showSuccessToast(getActivity(), res);
+            } else {
+                Utils.showErrorToast(getActivity(), "执行失败...");
+            }
+        }
+
     }
 
 }

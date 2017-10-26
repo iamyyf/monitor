@@ -14,6 +14,7 @@ import cn.chinaunicom.monitor.beans.CenterEntity;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.AlarmCategoryReq;
 import cn.chinaunicom.monitor.http.Response.UnCheckAlarmCategoryResp;
+import cn.chinaunicom.monitor.mine.MineFragment;
 import cn.chinaunicom.monitor.sqlite.AlarmDatabaseHelper;
 import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Utils;
@@ -168,15 +169,20 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
 //                    db.close();
                     }
                 }
-                MainActivity.instance.updateBadge();
+                MainActivity.instance.updateAlarmBadge();
                 if (null != AlarmFragment.instance)
                     AlarmFragment.instance.title.setText(ChinaUnicomApplication.alarmCurCenter.title + "-告警");
         }
 
         if (!Utils.isListEmpty(resp.data.reportIds)) {
-            ChinaUnicomApplication.reportsIds.clear();
-            ChinaUnicomApplication.reportsIds.addAll(resp.data.reportIds);
+            for (int i = 0; i < resp.data.reportIds.size(); i++) {
+                if (!ChinaUnicomApplication.reportsIds.contains(resp.data.reportIds.get(i)))
+                    ChinaUnicomApplication.reportsIds.add(resp.data.reportIds.get(i));
+            }
             //TODO:更新红点逻辑，用回调
+            MainActivity.instance.updateMineBadge();
+            if (null != MineFragment.instance)
+                MineFragment.instance.updateReportBadage();
         }
     }
 }

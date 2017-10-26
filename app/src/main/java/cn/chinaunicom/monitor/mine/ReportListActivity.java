@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jauker.widget.BadgeView;
 import com.zaaach.toprightmenu.MenuItem;
 import com.zaaach.toprightmenu.TopRightMenu;
 
@@ -35,6 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.chinaunicom.monitor.BaseActivity;
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
+import cn.chinaunicom.monitor.MainActivity;
 import cn.chinaunicom.monitor.R;
 import cn.chinaunicom.monitor.beans.CenterEntity;
 import cn.chinaunicom.monitor.beans.ReportEntity;
@@ -58,6 +61,7 @@ public class ReportListActivity extends BaseActivity {
     private ReportGridViewAdapter mAdapter = new ReportGridViewAdapter(reportEntities);
     private TopRightMenu menu;
     private CenterEntity curCenter = null;
+    private BadgeView imgRightBtnBadgeView;
 
     private final int UNREAD = 1;
     private final int HAS_READ = 0;
@@ -81,17 +85,11 @@ public class ReportListActivity extends BaseActivity {
 
     @OnClick(R.id.imgBtnRight)
     void popMenu() {
-        Cursor uncheckCenterCursor = db.query("REPORT_CENTER", Config.REPORT_CENTER_COLUMN,
-                null, null, null, null, null);
-        while (uncheckCenterCursor.moveToNext()) {
-            if (uncheckCenterCursor.getInt(3) == UNREAD) //有未读消息
-                uncheckCenterMap.put(uncheckCenterCursor.getString(1), uncheckCenterCursor.getString(2));
-        }
+        updateUnCheckCenterMap();
         updateReportCenterList();
         initTopRigtMenu();
         initMenuItem(reportCenterEntities, uncheckCenterMap);
         menu.showAsDropDown(menuTopRight, 0, 0);
-        uncheckCenterCursor.close();
     }
 
     @Override
@@ -116,6 +114,25 @@ public class ReportListActivity extends BaseActivity {
     @Override
     public void initView() {
         initTitleBar();
+
+        imgRightBtnBadgeView = new BadgeView(this);
+        imgRightBtnBadgeView.setTargetView(menuTopRight);
+        imgRightBtnBadgeView.getBackground().setAlpha(0);
+        imgRightBtnBadgeView.setTextColor(Color.rgb(205, 175, 149));
+        imgRightBtnBadgeView.setBadgeGravity(Gravity.TOP | Gravity.RIGHT );
+
+        updateUnCheckCenterMap();
+        updateTopRightPoint();
+    }
+
+    private void updateUnCheckCenterMap() {
+        Cursor uncheckCenterCursor = db.query("REPORT_CENTER", Config.REPORT_CENTER_COLUMN,
+                null, null, null, null, null);
+        while (uncheckCenterCursor.moveToNext()) {
+            if (uncheckCenterCursor.getInt(3) == UNREAD) //有未读消息
+                uncheckCenterMap.put(uncheckCenterCursor.getString(1), uncheckCenterCursor.getString(2));
+        }
+        uncheckCenterCursor.close();
     }
 
     private void updateReportsList(CenterEntity curCenter) {
@@ -219,11 +236,19 @@ public class ReportListActivity extends BaseActivity {
                 viewHolder.isChecked.setTextColor(Color.RED);
                 viewHolder.isChecked.setText("未读");
             } else {
-                viewHolder.isChecked.setTextColor(Color.GREEN);
+                viewHolder.isChecked.setTextColor(Color.rgb(32,114,69));
                 viewHolder.isChecked.setText("已读");
             }
 
             return convertView;
+        }
+    }
+
+    private void updateTopRightPoint() {
+        if (!uncheckCenterMap.isEmpty()) {
+            imgRightBtnBadgeView.setText("●");
+        } else {
+            imgRightBtnBadgeView.setBadgeCount(0);
         }
     }
 
@@ -291,6 +316,7 @@ public class ReportListActivity extends BaseActivity {
         curCenter.isUncheck = HAS_READ;
 
         uncheckCenterMap.remove(curCenter.title);
+        updateTopRightPoint();
         ContentValues values = new ContentValues();
         values.put("is_uncheck", HAS_READ);
         db.update("REPORT_CENTER", values, "center_name=?", new String[]{curCenter.title});
@@ -360,6 +386,11 @@ public class ReportListActivity extends BaseActivity {
                 updateReportsList(curCenter);
                 title.setText(curCenter.title + "-晨检报告");
                 ChinaUnicomApplication.reportsIds.clear();
+                updateUnCheckCenterMap();
+                updateTopRightPoint();
+                MainActivity.instance.updateMineBadge();
+                if (null != MineFragment.instance)
+                    MineFragment.instance.updateReportBadage();
             } else {
                 loadToast.error();
                 Utils.showErrorToast(ReportListActivity.this, Config.TOAST_REQUEST_FAILED);

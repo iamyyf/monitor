@@ -8,5 +8,24 @@
     <include layout="@layout/layout_standard_title_bar" />
     <include layout="@layout/divider_10_height" />
 
+    <Button
+        android:id="@+id/connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect"/>
+
+    <Button
+        android:id="@+id/ls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ls"/>
+
+    <Button
+        android:id="@+id/cd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cd"/>
+
+
 
 </LinearLayout>

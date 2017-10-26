@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 
 import cn.chinaunicom.monitor.http.Request.AlarmCategoryReq;
 import cn.chinaunicom.monitor.http.Request.BaseReq;
+import cn.chinaunicom.monitor.http.Request.ConnectHostReq;
 import cn.chinaunicom.monitor.http.Request.DataSetChartsReq;
 import cn.chinaunicom.monitor.http.Request.DataSetIpReq;
+import cn.chinaunicom.monitor.http.Request.ExcuteCommandReq;
 import cn.chinaunicom.monitor.http.Request.GridViewReq;
 import cn.chinaunicom.monitor.http.Request.LogoutReq;
 import cn.chinaunicom.monitor.http.Request.MainframeDetailChartReq;
@@ -17,8 +19,10 @@ import cn.chinaunicom.monitor.http.Request.JPushAliasReq;
 import cn.chinaunicom.monitor.http.Request.LoginReq;
 import cn.chinaunicom.monitor.http.Request.MainframeDetailReq;
 import cn.chinaunicom.monitor.http.Request.MainframeListReq;
+import cn.chinaunicom.monitor.http.Response.BaseResp;
 import cn.chinaunicom.monitor.http.Response.DataSetChartsResp;
 import cn.chinaunicom.monitor.http.Response.DataSetIpResp;
+import cn.chinaunicom.monitor.http.Response.ExcuteCommandResp;
 import cn.chinaunicom.monitor.http.Response.GridViewResp;
 import cn.chinaunicom.monitor.http.Response.LogoutResp;
 import cn.chinaunicom.monitor.http.Response.ReportsResp;
@@ -141,6 +145,16 @@ public class Http extends AbstractHttpClient{
         return syncOkHttpPost(ActionType.Reports.actionUrl, postString, ReportsResp.class);
     }
 
+    //测试
+    public BaseResp connectHost(ConnectHostReq req) {
+        String postString = new Gson().toJson(req);
+        return syncOkHttpPost(ActionType.ConnectHost.actionUrl, postString, BaseResp.class);
+    }
+
+    public ExcuteCommandResp excuteCommand(ExcuteCommandReq req) {
+        String postString = new Gson().toJson(req);
+        return syncOkHttpPost(ActionType.ExcuteCommand.actionUrl, postString, ExcuteCommandResp.class);
+    }
 
     public static class Builder {
         public Http create() {

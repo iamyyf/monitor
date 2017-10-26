@@ -5,5 +5,6 @@ package cn.chinaunicom.monitor.callback;
  */
 
 public interface TabBarBadgeCallBack {
-    public void updateBadge();
+    void updateAlarmBadge();
+    void updateMineBadge();
 }
