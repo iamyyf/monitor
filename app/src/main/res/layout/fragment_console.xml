@@ -8,6 +8,18 @@
     <include layout="@layout/layout_standard_title_bar" />
     <include layout="@layout/divider_10_height" />
 
+    <TextView
+        android:id="@+id/console"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/chart_height_256"
+        android:scrollbars="vertical"
+        android:background="@color/colorBlack"
+        android:textColor="@color/colorWhite"
+        android:padding="@dimen/margin_8"
+        android:fadeScrollbars="true" />
+
+    <include layout="@layout/divider_10_height" />
+
     <Button
         android:id="@+id/connect"
         android:layout_width="wrap_content"
@@ -25,7 +37,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="cd"/>
-
-
 
 </LinearLayout>

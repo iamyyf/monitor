@@ -4,6 +4,7 @@ package cn.chinaunicom.monitor.console;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,9 @@ public class ConsoleFragment extends Fragment {
 
     @Bind(R.id.txtViewTitle)
     TextView title;
+
+    @Bind(R.id.console)
+    TextView console;
 
     @OnClick(R.id.connect)
     void connect() {
@@ -69,8 +73,17 @@ public class ConsoleFragment extends Fragment {
         return view;
     }
 
+    private void refreshConsole(String res) {
+        console.append(res);
+        int offset = console.getLineCount() * console.getLineHeight();
+        if(offset > console.getHeight()){
+            console.scrollTo(0,offset - console.getHeight());
+        }
+    }
+
     private void initView() {
         title.setText("控制台");
+        console.setMovementMethod(ScrollingMovementMethod.getInstance());
     }
 
     private void startConnectHostTask() {
@@ -137,7 +150,7 @@ public class ConsoleFragment extends Fragment {
             if (Utils.isRequestSuccess(resp)) {
                 String res = new String(Base64.decode(resp.data.result, Base64.DEFAULT));
                 Logger.e("CONSOLE", res);
-                Utils.showSuccessToast(getActivity(), res);
+                refreshConsole(res);
             } else {
                 Utils.showErrorToast(getActivity(), "执行失败...");
             }

@@ -104,7 +104,7 @@ public class ReportListActivity extends BaseActivity {
         else {
             updateReportCenterList();
             updateReportsList(curCenter);
-            title.setText(curCenter.title + "-晨检报告");
+            updateTitle();
         }
         initTopRigtMenu();
         initGridView();
@@ -123,6 +123,13 @@ public class ReportListActivity extends BaseActivity {
 
         updateUnCheckCenterMap();
         updateTopRightPoint();
+    }
+
+    private void updateTitle() {
+        if (curCenter == null || curCenter.title == null)
+            title.setText("暂无晨检报告记录");
+        else
+            title.setText(curCenter.title + "-晨检报告");
     }
 
     private void updateUnCheckCenterMap() {
@@ -193,7 +200,6 @@ public class ReportListActivity extends BaseActivity {
             backBtn.setImageDrawable(getResources().getDrawable(R.mipmap.ic_back_arrow));
             menuTopRight.setImageDrawable(getResources().getDrawable(R.mipmap.ic_menu));
         }
-        //title.setText("晨检报告");
     }
 
     class ReportGridViewAdapter extends BaseAdapter {
@@ -320,7 +326,7 @@ public class ReportListActivity extends BaseActivity {
         ContentValues values = new ContentValues();
         values.put("is_uncheck", HAS_READ);
         db.update("REPORT_CENTER", values, "center_name=?", new String[]{curCenter.title});
-        title.setText(curCenter.title + "-晨检报告");
+        updateTitle();
         updateReportsList(curCenter);
     }
 
@@ -384,7 +390,7 @@ public class ReportListActivity extends BaseActivity {
                 loadToast.success();
                 updateReportCenterList();
                 updateReportsList(curCenter);
-                title.setText(curCenter.title + "-晨检报告");
+                updateTitle();
                 ChinaUnicomApplication.reportsIds.clear();
                 updateUnCheckCenterMap();
                 updateTopRightPoint();

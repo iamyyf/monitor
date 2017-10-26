@@ -181,7 +181,11 @@ public class MineFragment extends Fragment implements FragmentCallback {
         db.delete("ALARM", null, null);
         db.delete("CENTER", null, null);
         db.delete("ALARM_CATEGORY", null, null);
+        db.delete("REPORT", null, null);
+        db.delete("REPORT_CENTER", null, null);
         MainActivity.instance.updateAlarmBadge();
+        MainActivity.instance.updateMineBadge();
+        MineFragment.instance.updateReportBadage();
         Utils.showSuccessToast(getActivity(), "缓存清除成功");
     }
     private void startLogoutTask() {

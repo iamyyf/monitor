@@ -194,7 +194,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
         initAlarmCategoryList(ChinaUnicomApplication.alarmCurCenter.itemId);
         getAlarmCategoryEntities(ChinaUnicomApplication.alarmCurCenter.itemId);
         Utils.showSuccessToast(getContext(), "已切换到 " + ChinaUnicomApplication.alarmCurCenter.title);
-        title.setText(ChinaUnicomApplication.alarmCurCenter.title + "-告警");
+        updateTitle();
     }
 
     //删除弹出菜单对话框里面中心前的红点与否
@@ -214,7 +214,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
                 ChinaUnicomApplication.alarmCurCenter = null;
                 ChinaUnicomApplication.alarmCategoryEntities.clear();
                 ChinaUnicomApplication.alarmCategoryAdapter.notifyDataSetChanged();
-                title.setText("暂无告警记录");
+                updateTitle();
             }
             updateTopRightPoint();
         } else {
@@ -371,6 +371,10 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
         } else {
             imgBtnRight.setImageDrawable(getResources().getDrawable(R.mipmap.ic_menu));
         }
+        updateTitle();
+    }
+
+    private void updateTitle() {
         if (!Utils.isListEmpty(ChinaUnicomApplication.alarmCenterList))
             title.setText(ChinaUnicomApplication.alarmCurCenter.title + "-告警");
         else
@@ -383,7 +387,8 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
                 null, null, null, null, null);
         while (uncheckCenterCursor.moveToNext()) {
             if (uncheckCenterCursor.getInt(3) == 1) {
-                uncheckCenterMap.put(uncheckCenterCursor.getString(1), uncheckCenterCursor.getString(2));
+                uncheckCenterMap.put(uncheckCenterCursor.getString(1),
+                        uncheckCenterCursor.getString(2));
             }
         }
         uncheckCenterCursor.close();
