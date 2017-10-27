@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context="cn.chinaunicom.monitor.MainActivity">
 
-
-
     <RadioGroup
         android:id="@+id/mainTabGroup"
         android:layout_width="match_parent"
@@ -89,7 +87,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginLeft="@dimen/margin_16"
-            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_22"
             android:visibility="invisible"/>
 
     </LinearLayout>
