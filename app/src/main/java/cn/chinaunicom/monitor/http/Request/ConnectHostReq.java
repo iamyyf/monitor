@@ -6,4 +6,5 @@ package cn.chinaunicom.monitor.http.Request;
 
 public class ConnectHostReq extends BaseReq {
     public String userName;
+    public String ip;
 }

@@ -11,20 +11,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.R;
+import cn.chinaunicom.monitor.beans.HostIp;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.ConnectHostReq;
 import cn.chinaunicom.monitor.http.Request.ExcuteCommandReq;
+import cn.chinaunicom.monitor.http.Request.HostIPsReq;
 import cn.chinaunicom.monitor.http.Response.BaseResp;
 import cn.chinaunicom.monitor.http.Response.ExcuteCommandResp;
+import cn.chinaunicom.monitor.http.Response.HostIPsResp;
+import cn.chinaunicom.monitor.utils.Config;
 import cn.chinaunicom.monitor.utils.Logger;
 import cn.chinaunicom.monitor.utils.Utils;
 
 public class ConsoleFragment extends Fragment {
+
+    private List<HostIp> hostIps = new ArrayList<>();
 
     @Bind(R.id.txtViewTitle)
     TextView title;
@@ -148,14 +159,63 @@ public class ConsoleFragment extends Fragment {
         protected void onPostExecute(ExcuteCommandResp resp) {
             super.onPostExecute(resp);
             if (Utils.isRequestSuccess(resp)) {
-                String res = new String(Base64.decode(resp.data.result, Base64.DEFAULT));
-                Logger.e("CONSOLE", res);
-                refreshConsole(res);
+                refreshConsole(buildCommandRes(resp.data.records));
             } else {
                 Utils.showErrorToast(getActivity(), "执行失败...");
             }
         }
 
+    }
+
+    private String buildCommandRes(List<String> data) {
+        StringBuilder sb = new StringBuilder();
+        for (int line = 0; line < data.size(); line++) {
+            sb.append(data.get(line));
+            if (line != data.size() - 1)
+                sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    private void startHostIpTask() {
+        HostIpTask task = new HostIpTask();
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+    }
+
+    class HostIpTask extends AsyncTask<Void, Void, HostIPsResp> {
+        HostIPsReq req;
+        LoadToast loadToast;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            loadToast = new LoadToast(getActivity());
+            req = new HostIPsReq();
+            req.userToken = ChinaUnicomApplication.token;
+            Utils.initLoadToast(loadToast);
+            loadToast.show();
+        }
+
+        @Override
+        protected HostIPsResp doInBackground(Void... voids) {
+            HostIPsResp resp = new Http.Builder().create().getHostIps(req);
+            return resp;
+        }
+
+        @Override
+        protected void onPostExecute(HostIPsResp resp) {
+            super.onPostExecute(resp);
+            if (Utils.isRequestSuccess(resp)) {
+                hostIps.clear();
+                if (!Utils.isListEmpty(resp.data.records)) {
+                    hostIps.clear();
+                    hostIps.addAll(resp.data.records);
+                }
+                loadToast.success();
+            } else {
+                loadToast.error();
+                Utils.showErrorToast(getActivity(), Config.TOAST_REQUEST_FAILED);
+            }
+        }
     }
 
 }

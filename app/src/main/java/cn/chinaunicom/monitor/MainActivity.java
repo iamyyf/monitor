@@ -252,13 +252,13 @@ public class  MainActivity extends BaseFragmentActivity implements TabBarBadgeCa
 
     private void initJPush(String alias) {
         //JPush初始化
-        //JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        //JPushInterface.setDebugMode(false); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);     		// 初始化 JPush
         JPushInterface.setAlias(this, 1, alias);
     }
 
     public void initNotification() {
-        int builderId =1;
+        int builderId = 1;
 
         //CustomPushNotificationBuilder builder = new CustomPushNotificationBuilder(MainActivity.this);
 

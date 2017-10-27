@@ -1,5 +1,6 @@
 package cn.chinaunicom.monitor.beans;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -7,5 +8,6 @@ import java.util.Map;
  */
 
 public class ExcuteCommandResult {
-    public String result;
+    public List<String> records;
+    public int recordCount;
 }

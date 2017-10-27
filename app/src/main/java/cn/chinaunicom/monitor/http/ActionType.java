@@ -26,8 +26,9 @@ public enum  ActionType {
     Reports("/openapi/androidgetreports"),                      //晨检报告
 
     //测试接口
-    ConnectHost("/openapi/connecthost"),                            //链接主机
-    ExcuteCommand("/openapi/excutecommand");                    //执行命令
+    ConnectHost("/openapi/connecthost"),                        //链接主机
+    ExcuteCommand("/openapi/excutecommand"),                    //执行命令
+    HostIPs("/openapi/gethostconfig");                          //服务器ip
 
     public final String actionUrl;
 
