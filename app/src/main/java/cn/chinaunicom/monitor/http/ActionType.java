@@ -28,7 +28,8 @@ public enum  ActionType {
     //测试接口
     ConnectHost("/openapi/connecthost"),                        //链接主机
     ExcuteCommand("/openapi/excutecommand"),                    //执行命令
-    HostIPs("/openapi/gethostconfig");                          //服务器ip
+    HostIPs("/openapi/gethostconfig"),                          //服务器ip
+    DisconnectServer("/openapi/exitconsole");                   //断开控制台链接
 
     public final String actionUrl;
 

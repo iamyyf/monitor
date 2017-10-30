@@ -7,6 +7,7 @@ import cn.chinaunicom.monitor.http.Request.BaseReq;
 import cn.chinaunicom.monitor.http.Request.ConnectHostReq;
 import cn.chinaunicom.monitor.http.Request.DataSetChartsReq;
 import cn.chinaunicom.monitor.http.Request.DataSetIpReq;
+import cn.chinaunicom.monitor.http.Request.DisconnectServerReq;
 import cn.chinaunicom.monitor.http.Request.ExcuteCommandReq;
 import cn.chinaunicom.monitor.http.Request.GridViewReq;
 import cn.chinaunicom.monitor.http.Request.HostIPsReq;
@@ -24,6 +25,7 @@ import cn.chinaunicom.monitor.http.Response.BaseResp;
 import cn.chinaunicom.monitor.http.Response.ConnectionResp;
 import cn.chinaunicom.monitor.http.Response.DataSetChartsResp;
 import cn.chinaunicom.monitor.http.Response.DataSetIpResp;
+import cn.chinaunicom.monitor.http.Response.DisconnectServerResp;
 import cn.chinaunicom.monitor.http.Response.ExcuteCommandResp;
 import cn.chinaunicom.monitor.http.Response.GridViewResp;
 import cn.chinaunicom.monitor.http.Response.HostIPsResp;
@@ -162,6 +164,11 @@ public class Http extends AbstractHttpClient{
     public HostIPsResp getHostIps(HostIPsReq req) {
         String postString = new Gson().toJson(req);
         return syncOkHttpPost(ActionType.HostIPs.actionUrl, postString, HostIPsResp.class);
+    }
+
+    public DisconnectServerResp disconnectServer(DisconnectServerReq req) {
+        String postString = new Gson().toJson(req);
+        return  syncOkHttpPost(ActionType.DisconnectServer.actionUrl, postString, DisconnectServerResp.class);
     }
 
     public static class Builder {

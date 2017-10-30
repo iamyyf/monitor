@@ -4,6 +4,7 @@ package cn.chinaunicom.monitor.console;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.R;
+import cn.chinaunicom.monitor.adapters.FragmentViewPagerAdapter;
 import cn.chinaunicom.monitor.beans.HostIp;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.ConnectHostReq;
@@ -35,7 +37,8 @@ import cn.chinaunicom.monitor.utils.Utils;
 
 public class ConsoleFragment extends Fragment {
 
-    private List<HostIp> hostIps = new ArrayList<>();
+    private FragmentViewPagerAdapter mViewPagerAdapter;
+    private List<Fragment> fragments = new ArrayList<>();
 
     @Bind(R.id.txtViewTitle)
     TextView title;
@@ -43,20 +46,23 @@ public class ConsoleFragment extends Fragment {
     @Bind(R.id.console)
     TextView console;
 
-    @OnClick(R.id.connect)
-    void connect() {
-        startConnectHostTask();
-    }
+    @Bind(R.id.consoleViewPager)
+    ViewPager consoleViewPager;
 
-    @OnClick(R.id.ls)
-    void ls() {
-        startExcuteCommandTask("ls -l");
-    }
-
-    @OnClick(R.id.cd)
-    void cd() {
-        startExcuteCommandTask("cd /root/lpy");
-    }
+//    @OnClick(R.id.connect)
+//    void connect() {
+//        startConnectHostTask();
+//    }
+//
+//    @OnClick(R.id.ls)
+//    void ls() {
+//        startExcuteCommandTask("ls -l");
+//    }
+//
+//    @OnClick(R.id.cd)
+//    void cd() {
+//        startExcuteCommandTask("cd /root/lpy");
+//    }
 
 
     public ConsoleFragment() {
@@ -78,7 +84,6 @@ public class ConsoleFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_console, container, false);
         ButterKnife.bind(this, view);
-
         initView();
 
         return view;
@@ -93,6 +98,9 @@ public class ConsoleFragment extends Fragment {
     }
 
     private void initView() {
+        fragments.add(new ConsoleServerFragment());
+        mViewPagerAdapter = new FragmentViewPagerAdapter(getChildFragmentManager(), fragments);
+        consoleViewPager.setAdapter(mViewPagerAdapter);
         title.setText("控制台");
         console.setMovementMethod(ScrollingMovementMethod.getInstance());
     }
@@ -175,47 +183,6 @@ public class ConsoleFragment extends Fragment {
                 sb.append("\n");
         }
         return sb.toString();
-    }
-
-    private void startHostIpTask() {
-        HostIpTask task = new HostIpTask();
-        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
-    }
-
-    class HostIpTask extends AsyncTask<Void, Void, HostIPsResp> {
-        HostIPsReq req;
-        LoadToast loadToast;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            loadToast = new LoadToast(getActivity());
-            req = new HostIPsReq();
-            req.userToken = ChinaUnicomApplication.token;
-            Utils.initLoadToast(loadToast);
-            loadToast.show();
-        }
-
-        @Override
-        protected HostIPsResp doInBackground(Void... voids) {
-            HostIPsResp resp = new Http.Builder().create().getHostIps(req);
-            return resp;
-        }
-
-        @Override
-        protected void onPostExecute(HostIPsResp resp) {
-            super.onPostExecute(resp);
-            if (Utils.isRequestSuccess(resp)) {
-                hostIps.clear();
-                if (!Utils.isListEmpty(resp.data.records)) {
-                    hostIps.clear();
-                    hostIps.addAll(resp.data.records);
-                }
-                loadToast.success();
-            } else {
-                loadToast.error();
-                Utils.showErrorToast(getActivity(), Config.TOAST_REQUEST_FAILED);
-            }
-        }
     }
 
 }
