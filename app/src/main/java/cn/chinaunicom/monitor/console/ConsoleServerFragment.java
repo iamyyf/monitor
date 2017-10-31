@@ -27,9 +27,13 @@ import cn.chinaunicom.monitor.adapters.OnlyTextSpinnerAdapter;
 import cn.chinaunicom.monitor.beans.HostIp;
 import cn.chinaunicom.monitor.beans.HostIpEntity;
 import cn.chinaunicom.monitor.http.Http;
+import cn.chinaunicom.monitor.http.Request.ConnectHostReq;
 import cn.chinaunicom.monitor.http.Request.HostIPsReq;
+import cn.chinaunicom.monitor.http.Response.BaseResp;
+import cn.chinaunicom.monitor.http.Response.ConnectionResp;
 import cn.chinaunicom.monitor.http.Response.HostIPsResp;
 import cn.chinaunicom.monitor.utils.Config;
+import cn.chinaunicom.monitor.utils.Logger;
 import cn.chinaunicom.monitor.utils.Utils;
 
 public class ConsoleServerFragment extends Fragment {
@@ -68,6 +72,7 @@ public class ConsoleServerFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         initSpinnerItemList();
+        initIpListView();
         mSpinnerAdapter = new OnlyTextSpinnerAdapter(getActivity(), spinnerItems);
         mIpListAdapter = new IpListAdapter();
         hostIpsSpinner.setAdapter(mSpinnerAdapter);
@@ -106,18 +111,24 @@ public class ConsoleServerFragment extends Fragment {
         }
     }
 
+    private void initIpListView() {
+       ipsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               startConnectHostTask();
+           }
+       });
+    }
+
     class IpListViewHolder {
-
         TextView ip;
-
         TextView desc;
-
         ImageView serverLogo;
 
         public IpListViewHolder(View view) {
-           ip = (TextView) view.findViewById(R.id.ip);
+           ip = (TextView) view.findViewById(R.id.itemTitle);
            desc = (TextView) view.findViewById(R.id.desc);
-           serverLogo = (ImageView) view.findViewById(R.id.serverLogo);
+           serverLogo = (ImageView) view.findViewById(R.id.logo);
         }
     }
 
@@ -143,15 +154,59 @@ public class ConsoleServerFragment extends Fragment {
             if (null != convertView) {
                 viewHolder = (IpListViewHolder) convertView.getTag();
             } else {
-                convertView = View.inflate(getActivity(), R.layout.list_item_host_ip, null);
+                convertView = View.inflate(getActivity(), R.layout.list_item_with_logo, null);
                 viewHolder = new IpListViewHolder(convertView);
                 convertView.setTag(viewHolder);
             }
 
             viewHolder.ip.setText(curServers.get(position).ip);
             viewHolder.desc.setText(curServers.get(position).desc);
+            viewHolder.serverLogo.setImageDrawable(getResources().getDrawable(R.mipmap.ic_server));
 
             return convertView;
+        }
+    }
+
+    private void startConnectHostTask() {
+        ConnectHostTask task = new ConnectHostTask();
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+    }
+
+    class ConnectHostTask extends AsyncTask<Void, Void, ConnectionResp> {
+        ConnectHostReq req;
+        LoadToast loadToast;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            req = new ConnectHostReq();
+            req.userToken = ChinaUnicomApplication.token;
+            req.userName = ChinaUnicomApplication.userName;
+            loadToast = new LoadToast(getActivity());
+            Utils.initLoadToast(loadToast);
+            loadToast.show();
+        }
+
+        @Override
+        protected ConnectionResp doInBackground(Void... params) {
+            ConnectionResp resp = new Http.Builder().create().connectHost(req);
+            return resp;
+        }
+
+        @Override
+        protected void onPostExecute(ConnectionResp resp) {
+            super.onPostExecute(resp);
+            if (Utils.isRequestSuccess(resp)) {
+                ConsoleFragment.instance.consoleViewPager.setCurrentItem(1, true);
+                ConsoleDicFragment.instance.commands.clear();
+                ConsoleDicFragment.instance.commands.addAll(resp.data.commandList);
+                ConsoleDicFragment.instance.mAdapter.notifyDataSetChanged();
+
+                loadToast.success();
+                Utils.showSuccessToast(getActivity(), "链接成功");
+            } else {
+                loadToast.error();
+                Utils.showErrorToast(getActivity(), "链接失败");
+            }
         }
     }
 
@@ -162,15 +217,11 @@ public class ConsoleServerFragment extends Fragment {
 
     class HostIpTask extends AsyncTask<Void, Void, HostIPsResp> {
         HostIPsReq req;
-        //LoadToast loadToast;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //loadToast = new LoadToast(getActivity());
             req = new HostIPsReq();
             req.userToken = ChinaUnicomApplication.token;
-            //Utils.initLoadToast(loadToast);
-            //loadToast.show();
         }
 
         @Override
@@ -188,11 +239,9 @@ public class ConsoleServerFragment extends Fragment {
                     ChinaUnicomApplication.consoleHostIps.clear();
                     ChinaUnicomApplication.consoleHostIps.addAll(resp.data.records);
                 }
-                //loadToast.success();
                 initSpinnerItemList();
                 mSpinnerAdapter.notifyDataSetChanged();
             } else {
-                //loadToast.error();
                 Utils.showErrorToast(getActivity(), Config.TOAST_REQUEST_FAILED);
             }
         }

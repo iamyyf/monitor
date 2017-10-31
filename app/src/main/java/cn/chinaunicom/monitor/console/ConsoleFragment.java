@@ -23,6 +23,7 @@ import butterknife.OnClick;
 import cn.chinaunicom.monitor.ChinaUnicomApplication;
 import cn.chinaunicom.monitor.R;
 import cn.chinaunicom.monitor.adapters.FragmentViewPagerAdapter;
+import cn.chinaunicom.monitor.beans.Connection;
 import cn.chinaunicom.monitor.beans.HostIp;
 import cn.chinaunicom.monitor.http.Http;
 import cn.chinaunicom.monitor.http.Request.ConnectHostReq;
@@ -39,6 +40,10 @@ public class ConsoleFragment extends Fragment {
 
     private FragmentViewPagerAdapter mViewPagerAdapter;
     private List<Fragment> fragments = new ArrayList<>();
+    public static ConsoleFragment instance = null;
+
+    public Connection conn = null;
+
 
     @Bind(R.id.txtViewTitle)
     TextView title;
@@ -77,6 +82,7 @@ public class ConsoleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
     }
 
     @Override
@@ -99,48 +105,20 @@ public class ConsoleFragment extends Fragment {
 
     private void initView() {
         fragments.add(new ConsoleServerFragment());
+        fragments.add(new ConsoleDicFragment());
         mViewPagerAdapter = new FragmentViewPagerAdapter(getChildFragmentManager(), fragments);
         consoleViewPager.setAdapter(mViewPagerAdapter);
         title.setText("控制台");
         console.setMovementMethod(ScrollingMovementMethod.getInstance());
     }
 
-    private void startConnectHostTask() {
-        ConnectHostTask task = new ConnectHostTask();
-        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
-    }
 
-    private void startExcuteCommandTask(String command) {
+    public void startExcuteCommandTask(String command) {
         ExcuteCommandTask task = new ExcuteCommandTask(command);
         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
     }
 
-    class ConnectHostTask extends AsyncTask<Void, Void, BaseResp> {
-        ConnectHostReq req;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            req = new ConnectHostReq();
-            req.userToken = ChinaUnicomApplication.token;
-            req.userName = ChinaUnicomApplication.userName;
-        }
 
-        @Override
-        protected BaseResp doInBackground(Void... params) {
-            BaseResp resp = new Http.Builder().create().connectHost(req);
-            return resp;
-        }
-
-        @Override
-        protected void onPostExecute(BaseResp resp) {
-            super.onPostExecute(resp);
-            if (Utils.isRequestSuccess(resp)) {
-                Utils.showSuccessToast(getActivity(), "链接成功...");
-            } else {
-                Utils.showErrorToast(getActivity(), "链接失败...");
-            }
-        }
-    }
 
     class ExcuteCommandTask extends AsyncTask<Void, Void, ExcuteCommandResp> {
         ExcuteCommandReq req;
@@ -179,9 +157,9 @@ public class ConsoleFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         for (int line = 0; line < data.size(); line++) {
             sb.append(data.get(line));
-            if (line != data.size() - 1)
-                sb.append("\n");
+            sb.append("\n");
         }
+        sb.append("\n");
         return sb.toString();
     }
 

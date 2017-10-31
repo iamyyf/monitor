@@ -16,11 +16,12 @@
         android:background="@color/colorBlack"
         android:textColor="@color/colorWhite"
         android:padding="@dimen/margin_8"
+        android:textSize="@dimen/text_size_12"
         android:fadeScrollbars="true" />
 
     <include layout="@layout/divider_10_height" />
 
-    <android.support.v4.view.ViewPager
+    <cn.chinaunicom.monitor.individuation.NoSlideViewPager
         android:id="@+id/consoleViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

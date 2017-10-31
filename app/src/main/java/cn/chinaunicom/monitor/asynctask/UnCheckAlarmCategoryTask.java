@@ -123,7 +123,6 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
                         db.update("CENTER", centerValues, "center_name=? and center_id=?", new String[]{centerName, centerId});
                     }
 
-                    //TODO:
                     updateAlarmCenterList();
                     //在刚登录时，用户肯定是没有选择中心标志的，所以中心标志为空，默认设为请求到的排在第一个的中心
                     if (null == ChinaUnicomApplication.alarmCurCenter) {
@@ -169,20 +168,21 @@ public class UnCheckAlarmCategoryTask extends AsyncTask<Void, Void, UnCheckAlarm
 //                    db.close();
                     }
                 }
-                MainActivity.instance.updateAlarmBadge();
                 if (null != AlarmFragment.instance)
                     AlarmFragment.instance.title.setText(ChinaUnicomApplication.alarmCurCenter.title + "-告警");
         }
+
+        MainActivity.instance.updateAlarmBadge();
 
         if (!Utils.isListEmpty(resp.data.reportIds)) {
             for (int i = 0; i < resp.data.reportIds.size(); i++) {
                 if (!ChinaUnicomApplication.reportsIds.contains(resp.data.reportIds.get(i)))
                     ChinaUnicomApplication.reportsIds.add(resp.data.reportIds.get(i));
             }
-            //TODO:更新红点逻辑，用回调
             MainActivity.instance.updateMineBadge();
             if (null != MineFragment.instance)
                 MineFragment.instance.updateReportBadage();
         }
+
     }
 }

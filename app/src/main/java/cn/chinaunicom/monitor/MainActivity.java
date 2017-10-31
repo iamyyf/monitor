@@ -68,9 +68,7 @@ public class  MainActivity extends BaseFragmentActivity implements TabBarBadgeCa
 
     @Bind(R.id.mainTabMineBtn)
     Button mainTabMineBtn;
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -7,7 +7,7 @@
     android:paddingBottom="@dimen/margin_8">
 
     <ImageView
-        android:id="@+id/serverLogo"
+        android:id="@+id/logo"
         android:layout_width="@dimen/margin_0"
         android:layout_height="match_parent"
         android:layout_marginRight="@dimen/margin_8"
@@ -25,7 +25,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/ip"
+            android:id="@+id/itemTitle"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_0"
             android:layout_weight="1"

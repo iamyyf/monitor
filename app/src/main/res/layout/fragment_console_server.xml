@@ -9,8 +9,8 @@
         android:id="@+id/hostIpsSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_8"
-        android:layout_marginRight="@dimen/margin_8"/>
+        android:layout_marginLeft="@dimen/margin_4"
+        android:layout_marginRight="@dimen/margin_4"/>
 
     <ListView
         android:id="@+id/ipsList"
