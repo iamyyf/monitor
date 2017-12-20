@@ -170,6 +170,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
                 .showIcon(true)
                 .dimBackground(true)
                 .needAnimationStyle(true)
+                .setHeight(1500)
                 .setOnMenuItemClickListener(
                         new TopRightMenu.OnMenuItemClickListener() {
                             @Override
