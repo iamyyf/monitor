@@ -151,7 +151,7 @@ public class MainframeFragment extends Fragment {
                 .setWidth(Config.POP_UP_DIALOG_WIDTH)
                 .dimBackground(true)
                 .needAnimationStyle(true)
-                .setHeight(1500)
+                .setHeight(Config.TOP_RIGHT_MENU_HEIGHT)
                 .setOnMenuItemClickListener(
                         new TopRightMenu.OnMenuItemClickListener() {
                             @Override

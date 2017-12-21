@@ -38,6 +38,7 @@ import cn.chinaunicom.monitor.MainActivity;
 import cn.chinaunicom.monitor.R;
 import cn.chinaunicom.monitor.beans.AlarmCategoryEntity;
 import cn.chinaunicom.monitor.beans.CenterEntity;
+import cn.chinaunicom.monitor.beans.Connection;
 import cn.chinaunicom.monitor.callback.TopRightPointCallBack;
 import cn.chinaunicom.monitor.sqlite.AlarmDatabaseHelper;
 import cn.chinaunicom.monitor.utils.Config;
@@ -170,7 +171,7 @@ public class AlarmFragment extends Fragment implements TopRightPointCallBack {
                 .showIcon(true)
                 .dimBackground(true)
                 .needAnimationStyle(true)
-                .setHeight(1500)
+                .setHeight(Config.TOP_RIGHT_MENU_HEIGHT)
                 .setOnMenuItemClickListener(
                         new TopRightMenu.OnMenuItemClickListener() {
                             @Override

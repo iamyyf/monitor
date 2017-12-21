@@ -70,4 +70,8 @@ public class Config {
 
     //极光推送
     public final static String CHECK_REPORT = "晨检报告";
+
+
+    //通用
+    public final static int TOP_RIGHT_MENU_HEIGHT = 1500;
 }
