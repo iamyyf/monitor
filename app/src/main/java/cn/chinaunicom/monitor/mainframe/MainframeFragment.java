@@ -72,7 +72,7 @@ public class MainframeFragment extends Fragment {
             intent.putExtra("CUR_CENTER_TITLE", ChinaUnicomApplication.mainframeCurCenter.title);
             startActivity(intent);
         } else {
-            Utils.showErrorToast(getContext(), "请等待所属中心数据请求完毕后再查看!");
+            Utils.showErrorToast(getContext(), "您没有权限查看!");
         }
     }
 
@@ -84,7 +84,7 @@ public class MainframeFragment extends Fragment {
             intent.putExtra("CUR_CENTER_TITLE", ChinaUnicomApplication.mainframeCurCenter.title);
             startActivity(intent);
         } else {
-            Utils.showErrorToast(getContext(), "请等待所属中心数据请求完毕后再查看!");
+            Utils.showErrorToast(getContext(), "您没有权限查看!");
         }
     }
 
@@ -256,12 +256,15 @@ public class MainframeFragment extends Fragment {
         for (int i = 0; i < data.size(); i++)
             menuItems.add(new MenuItem(data.get(i).title));
         menu.addMenuList(menuItems);
-        if (null == ChinaUnicomApplication.mainframeCurCenter) {
+        if (null == ChinaUnicomApplication.mainframeCurCenter && !Utils.isListEmpty(data)) {
             ChinaUnicomApplication.mainframeCurCenter = new CenterEntity(data.get(0).itemId, data.get(0).title);
         }
-        updateGridList();
-        initGridView();
-        title.setText(ChinaUnicomApplication.mainframeCurCenter.title);
+        if (!Utils.isListEmpty(data)) {
+            updateGridList();
+            initGridView();
+            title.setText(ChinaUnicomApplication.mainframeCurCenter.title);
+        }
+
     }
 
     private void updateGridList() {

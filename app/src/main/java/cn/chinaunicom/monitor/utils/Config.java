@@ -8,8 +8,9 @@ import cn.chinaunicom.monitor.R;
 
 public class Config {
     //网络相关
-    public static final String HTTP_SERVER_URL  = "http://120.52.49.69:9701";       //Server地址
-    //public static final String HTTP_SERVER_URL  = "http://172.16.4.227:8080";        //lpy
+    //public static final String HTTP_SERVER_URL  = "http://120.52.49.69:9701";       //Server地址
+    //public static final String HTTP_SERVER_URL  = "http://172.16.4.48:8080";        //lpy
+    public static final String HTTP_SERVER_URL  = "http://tiangongplatform.cn:8081";  //新的server地址
     public static final int HTTP_TIMEOUT          = 10000;                            //超时时间
     public static final String REQ_SUCCESS_MSG    ="OK";                              //请求成功msg
     public static final int REQ_SUCCESS_CODE      = 0;                                //请求成功code
@@ -73,5 +74,5 @@ public class Config {
 
 
     //通用
-    public final static int TOP_RIGHT_MENU_HEIGHT = 1500;
+    public final static int TOP_RIGHT_MENU_HEIGHT = 1000;
 }
